@@ -16,5 +16,8 @@
   },
   "dependencies": {
     "solid-js": "^1.4.2"
+  },
+  "volta": {
+    "node": "18.3.0"
   }
 }
