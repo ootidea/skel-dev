@@ -1,14 +1,12 @@
 {
-  "name": "vite-template-solid",
-  "version": "0.0.0",
-  "description": "",
+  "name": "skel-dev",
+  "private": true,
   "scripts": {
     "start": "vite",
     "dev": "vite",
     "build": "vite build",
     "serve": "vite preview"
   },
-  "license": "MIT",
   "devDependencies": {
     "typescript": "^4.6.4",
     "vite": "^2.9.9",
