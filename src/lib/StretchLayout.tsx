@@ -1,7 +1,6 @@
-import { mergeProps, splitProps } from 'solid-js'
 import { ParentProps } from 'solid-js/types/render/component'
 import './StretchLayout.scss'
-import { BaseProps, joinClasses, joinStyles } from './utility/props'
+import { BaseProps, joinClasses, joinStyles, prepareProps } from './utility/props'
 
 export function StretchLayout(
   rawProps: ParentProps<
@@ -11,13 +10,10 @@ export function StretchLayout(
     }
   >
 ) {
-  const [props, restProps] = splitProps(mergeProps(rawProps, { stretchAt: 0, direction: 'horizontal' }), [
-    'class',
-    'classList',
-    'style',
-    'stretchAt',
-    'direction',
-  ])
+  const [props, restProps] = prepareProps(rawProps, ['class', 'classList', 'style', 'stretchAt', 'direction'], {
+    stretchAt: 0,
+    direction: 'horizontal',
+  })
 
   return (
     <div
