@@ -5,6 +5,7 @@
     "start": "vite",
     "dev": "vite",
     "build": "vite build",
+    "check": "tsc --noEmit",
     "format": "run-p format:*",
     "format:prettier": "prettier --write \"src/**/*.{ts,tsx,css,scss}\"",
     "format:package-json": "sort-package-json",
