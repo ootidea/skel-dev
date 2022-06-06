@@ -5,12 +5,12 @@
 
 .skel-Divider_root {
   background-color: var(--skel-Divider_color);
-  
+
   &[data-direction='horizontal'] {
     width: 100%;
     height: var(--skel-Divider_thickness);
   }
-  
+
   &[data-direction='vertical'] {
     width: var(--skel-Divider_thickness);
     height: 100%;
