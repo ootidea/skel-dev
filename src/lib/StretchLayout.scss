@@ -5,6 +5,7 @@
   &[data-direction='horizontal'] {
     grid-auto-flow: column;
     grid-template-columns: var(--skel-StretchLayout_template);
+    width: 100%;
   }
 
   &[data-direction='vertical'] {
