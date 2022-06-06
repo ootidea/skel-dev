@@ -17,7 +17,7 @@ export function StretchLayout(
 
   return (
     <div
-      class={`skel-StretchLayout_root ${joinClasses(props.class, props.classList)}`}
+      class={joinClasses('skel-StretchLayout_root', props)}
       style={joinStyles(props.style, {
         '--skel-StretchLayout_template': 'auto '.repeat(Number(rawProps.stretchAt)) + 'minmax(0, 1fr)',
       })}

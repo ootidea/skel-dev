@@ -1,4 +1,5 @@
 import { JSX, mergeProps, splitProps } from 'solid-js'
+import { filterNonUndefined, mapUndefined } from './others'
 
 export type BaseProps = {
   class?: string
@@ -42,15 +43,14 @@ export function prepareProps<T, U extends AtLeastOneProperty<DefaultValues<T>>>(
   return splitProps(mergeProps(defaultValues, props), knownKeys) as any
 }
 
-export function joinClasses(klass: string | undefined, classes: Record<string, unknown> | undefined): string {
-  const conditionalClasses = Object.entries(classes ?? {})
-    .filter(([, value]) => Boolean(value))
-    .map(([key]) => key)
-    .join(' ')
-  if (klass === undefined) {
-    return conditionalClasses
-  }
-  return `${klass} ${conditionalClasses}`
+export function joinClasses(baseClass: string, props: BaseProps): string {
+  const conditionalClasses = mapUndefined(props.classList, (classList) =>
+    Object.entries(classList)
+      .filter(([, value]) => Boolean(value))
+      .map(([key]) => key)
+      .join(' ')
+  )
+  return filterNonUndefined([baseClass, props.class, conditionalClasses]).join(' ')
 }
 
 export function joinStyles(style: JSX.CSSProperties | string | undefined, styles: JSX.CSSProperties): string {

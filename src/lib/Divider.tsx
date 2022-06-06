@@ -17,7 +17,7 @@ export function Divider(
 
   return (
     <div
-      class={`skel-Divider_root ${joinClasses(props.class, props.classList)}`}
+      class={joinClasses('skel-Divider_root', props)}
       style={joinStyles(props.style, {
         '--skel-Divider_thickness': props.thickness,
         '--skel-Divider_color': props.color,
