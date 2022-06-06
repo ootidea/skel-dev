@@ -1,4 +1,5 @@
 import { Route, Router, Routes } from 'solid-app-router'
+import { For } from 'solid-js'
 import classes from './App.module.scss'
 import { Divider } from './lib/Divider'
 import { StretchLayout } from './lib/StretchLayout'
@@ -7,18 +8,24 @@ import { StretchLayoutComponent } from './page/StretchLayoutComponent'
 import { SidebarMenu } from './SidebarMenu'
 
 export function App() {
+  const pages = [
+    ['Divider', DividerComponent],
+    ['StretchLayout', StretchLayoutComponent],
+  ] as const
+
   return (
     <Router>
       <StretchLayout style={{ height: '100%' }} stretchAt={2}>
         <nav class={classes.sidebar}>
-          <SidebarMenu componentName="Divider" />
-          <SidebarMenu componentName="StretchLayout" />
+          <For each={pages}>{([name]) => <SidebarMenu componentName={name} />}</For>
         </nav>
         <Divider direction="vertical" />
         <main class={classes.main}>
           <Routes>
-            <Route path="Divider" element={<DividerComponent />} />
-            <Route path="StretchLayout" element={<StretchLayoutComponent />} />
+            {/* For some reason, it was not displayed using the For component. */}
+            {pages.map(([name, component]) => (
+              <Route path={name} element={component} />
+            ))}
           </Routes>
         </main>
       </StretchLayout>
