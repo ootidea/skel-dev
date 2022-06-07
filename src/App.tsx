@@ -2,14 +2,17 @@ import { Route, Router, Routes } from 'solid-app-router'
 import { For } from 'solid-js'
 import classes from './App.module.scss'
 import { Divider } from './lib/Divider'
+import { Spinner } from './lib/Spinner'
 import { StretchLayout } from './lib/StretchLayout'
 import { DividerComponent } from './page/DividerComponent'
+import { SpinnerComponent } from './page/SpinnerComponent'
 import { StretchLayoutComponent } from './page/StretchLayoutComponent'
 import { SidebarMenu } from './SidebarMenu'
 
 export function App() {
   const pages = [
     ['Divider', DividerComponent],
+    ['Spinner', SpinnerComponent],
     ['StretchLayout', StretchLayoutComponent],
   ] as const
 
