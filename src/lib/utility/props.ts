@@ -1,11 +1,5 @@
 import { JSX, mergeProps, splitProps } from 'solid-js'
-import { filterNonUndefined, mapUndefined } from './others'
-
-export type BaseProps = {
-  class?: string
-  classList?: Record<string, boolean | undefined>
-  style?: JSX.CSSProperties | string
-}
+import { objectKeys } from './others'
 
 /**
  * Return string literal union type that is keys of optional properties.
@@ -34,40 +28,56 @@ type DefaultValues<T> = Pick<Required<T>, OptionalKeys<T>>
  */
 export type AtLeastOneProperty<T, K extends keyof T = keyof T> = K extends K ? Record<K, T[K]> : never
 
-/** Combination of mergeProps and splitProps */
+/**
+ * Set default value to props, and split props into two parts.
+ * The first part is for direct use within the component.
+ * The second part is for transport to DOM element as attributes.
+ *
+ * @example
+ * prepareProps({ tint: 'red', tabindex: '0' }, { size: '1em' }, ['tint'])
+ * is the same value as
+ * [{ tint: 'red', size: '1em' }, { tabindex: '0' }]
+ */
 export function prepareProps<T, U extends AtLeastOneProperty<DefaultValues<T>>>(
-  props: T,
-  knownKeys: (keyof T)[],
-  defaultValues: U
+  rawProps: T,
+  defaultValues: U,
+  otherKnownKeys: (keyof T)[] = []
 ): [U & T, {}] {
-  return splitProps(mergeProps(defaultValues, props), knownKeys) as any
+  // Difficult to type accurately because keyof T equals string | number | Symbol but Object.keys returns string[]
+  const keys = objectKeys(defaultValues) as any
+  return splitProps(mergeProps(defaultValues, rawProps), otherKnownKeys.concat(keys)) as any
 }
 
-export function joinClasses(baseClass: string, props: BaseProps): string {
-  const conditionalClasses = mapUndefined(props.classList, (classList) =>
-    Object.entries(classList)
-      .filter(([, value]) => Boolean(value))
-      .map(([key]) => key)
-      .join(' ')
-  )
-  return filterNonUndefined([baseClass, props.class, conditionalClasses]).join(' ')
+export function joinClass(injectedClass: string | undefined, baseClass: string): string {
+  if (injectedClass === undefined) return baseClass
+
+  return `${baseClass} ${injectedClass}`
 }
 
-export function joinStyles(style: JSX.CSSProperties | string | undefined, styles: JSX.CSSProperties): string {
-  const stylesAsString = Object.entries(styles)
+export function joinClassList(
+  injectedClassList: Record<string, boolean | undefined> | undefined,
+  classList: Record<string, boolean | undefined>
+): Record<string, boolean | undefined> {
+  if (injectedClassList === undefined) return classList
+
+  return Object.assign({}, classList, injectedClassList)
+}
+
+export function joinStyle(injectedStyle: JSX.CSSProperties | string | undefined, baseStyle: JSX.CSSProperties): string {
+  const stylesAsString = Object.entries(baseStyle)
     .map(([key, value]) => `${key}: ${value}`)
     .join('; ')
 
-  if (style === undefined) return stylesAsString
+  if (injectedStyle === undefined) return stylesAsString
 
-  if (typeof style === 'string') {
-    if (style.trim().endsWith(';')) {
-      return `${style} ${stylesAsString}`
+  if (typeof injectedStyle === 'string') {
+    if (injectedStyle.trim().endsWith(';')) {
+      return `${injectedStyle} ${stylesAsString}`
     }
-    return `${style}; ${stylesAsString}`
+    return `${injectedStyle}; ${stylesAsString}`
   }
 
-  const styleAsString = Object.entries(style)
+  const styleAsString = Object.entries(injectedStyle)
     .map(([key, value]) => `${key}: ${value}`)
     .join('; ')
   return `${styleAsString}; ${stylesAsString}`

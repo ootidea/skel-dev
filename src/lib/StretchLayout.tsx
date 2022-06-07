@@ -1,29 +1,26 @@
+import { JSX, mergeProps } from 'solid-js'
 import { ParentProps } from 'solid-js/types/render/component'
 import './StretchLayout.scss'
-import { BaseProps, joinClasses, joinStyles, prepareProps } from './utility/props'
+import { joinClass, joinStyle, prepareProps } from './utility/props'
 
 export function StretchLayout(
   rawProps: ParentProps<
-    BaseProps & {
-      stretchAt?: number | `${number}`
-      direction?: 'horizontal' | 'vertical'
-    }
+    JSX.HTMLAttributes<HTMLDivElement> & { stretchAt?: number | `${number}`; direction?: 'horizontal' | 'vertical' }
   >
 ) {
-  const [props, restProps] = prepareProps(rawProps, ['class', 'classList', 'style', 'stretchAt', 'direction'], {
+  const [props, restProps] = prepareProps(rawProps, {
     stretchAt: 0,
     direction: 'horizontal',
   })
+  const attrs = mergeProps(restProps, {
+    class: joinClass(rawProps.class, 'skel-StretchLayout_root'),
+    style: joinStyle(rawProps.style, {
+      '--skel-StretchLayout_template': 'auto '.repeat(Number(props.stretchAt)) + 'minmax(0, 1fr)',
+    }),
+  })
 
   return (
-    <div
-      class={joinClasses('skel-StretchLayout_root', props)}
-      style={joinStyles(props.style, {
-        '--skel-StretchLayout_template': 'auto '.repeat(Number(rawProps.stretchAt)) + 'minmax(0, 1fr)',
-      })}
-      data-direction={props.direction}
-      {...restProps}
-    >
+    <div data-direction={props.direction} {...attrs}>
       {rawProps.children}
     </div>
   )
