@@ -4,6 +4,7 @@ import classes from './App.module.scss'
 import { Divider } from './lib/Divider'
 import { Spinner } from './lib/Spinner'
 import { StretchLayout } from './lib/StretchLayout'
+import { ButtonComponent } from './page/ButtonComponent'
 import { DividerComponent } from './page/DividerComponent'
 import { GravityComponent } from './page/GravityComponent'
 import { SpinnerComponent } from './page/SpinnerComponent'
@@ -12,6 +13,7 @@ import { SidebarMenu } from './SidebarMenu'
 
 export function App() {
   const pages = [
+    ['Button', ButtonComponent],
     ['Divider', DividerComponent],
     ['Spinner', SpinnerComponent],
     ['StretchLayout', StretchLayoutComponent],
