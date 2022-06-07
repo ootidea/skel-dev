@@ -1,18 +1,15 @@
-import { createMemo, JSX, mergeProps } from 'solid-js'
-import { ParentProps } from 'solid-js/types/render/component'
+import { createMemo, mergeProps } from 'solid-js'
 import './common.scss'
 import './Spinner.scss'
-import { joinClass, joinStyle, prepareProps } from './utility/props'
+import { joinClass, joinStyle, prepareProps, SkelProps } from './utility/props'
 
 export function Spinner(
-  rawProps: ParentProps<
-    JSX.HTMLAttributes<HTMLDivElement> & {
-      size?: string
-      thickness?: number
-      frequency?: number
-      inverted?: boolean
-    }
-  >
+  rawProps: SkelProps<{
+    size?: string
+    thickness?: number
+    frequency?: number
+    inverted?: boolean
+  }>
 ) {
   const [props, restProps] = prepareProps(rawProps, {
     size: 'var(--skel-Spinner_default-size)',

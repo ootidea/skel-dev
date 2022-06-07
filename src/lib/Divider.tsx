@@ -1,12 +1,9 @@
-import { JSX, mergeProps } from 'solid-js'
-import { ParentProps } from 'solid-js/types/render/component'
+import { mergeProps } from 'solid-js'
 import './Divider.scss'
-import { joinClass, joinStyle, prepareProps } from './utility/props'
+import { joinClass, joinStyle, prepareProps, SkelProps } from './utility/props'
 
 export function Divider(
-  rawProps: ParentProps<
-    JSX.HTMLAttributes<HTMLDivElement> & { direction?: 'horizontal' | 'vertical'; thickness?: string; color?: string }
-  >
+  rawProps: SkelProps<{ direction?: 'horizontal' | 'vertical'; thickness?: string; color?: string }>
 ) {
   const [props, restProps] = prepareProps(rawProps, {
     direction: 'horizontal',

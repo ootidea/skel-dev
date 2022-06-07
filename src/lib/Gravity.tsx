@@ -1,10 +1,9 @@
-import { JSX, mergeProps } from 'solid-js'
-import { ParentProps } from 'solid-js/types/render/component'
+import { mergeProps } from 'solid-js'
 import './Gravity.scss'
 import { EnneaPosition, toHorizontalPosition, toVerticalPosition } from './utility/others'
-import { joinClass, prepareProps } from './utility/props'
+import { joinClass, prepareProps, SkelProps } from './utility/props'
 
-export function Gravity(rawProps: ParentProps<JSX.HTMLAttributes<HTMLDivElement> & { to?: EnneaPosition }>) {
+export function Gravity(rawProps: SkelProps<{ to?: EnneaPosition }>) {
   const [props, restProps] = prepareProps(rawProps, {
     to: 'center',
   } as const)

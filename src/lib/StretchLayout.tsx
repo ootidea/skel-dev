@@ -1,12 +1,9 @@
-import { JSX, mergeProps } from 'solid-js'
-import { ParentProps } from 'solid-js/types/render/component'
+import { mergeProps } from 'solid-js'
 import './StretchLayout.scss'
-import { joinClass, joinStyle, prepareProps } from './utility/props'
+import { joinClass, joinStyle, prepareProps, SkelProps } from './utility/props'
 
 export function StretchLayout(
-  rawProps: ParentProps<
-    JSX.HTMLAttributes<HTMLDivElement> & { stretchAt?: number | `${number}`; direction?: 'horizontal' | 'vertical' }
-  >
+  rawProps: SkelProps<{ stretchAt?: number | `${number}`; direction?: 'horizontal' | 'vertical' }>
 ) {
   const [props, restProps] = prepareProps(rawProps, {
     stretchAt: 0,

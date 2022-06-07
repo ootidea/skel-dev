@@ -1,6 +1,8 @@
 import { JSX, mergeProps, splitProps } from 'solid-js'
 import { objectKeys } from './others'
 
+export type SkelProps<T, Base = HTMLDivElement> = Omit<JSX.HTMLAttributes<Base>, keyof T> & T
+
 /**
  * Return string literal union type that is keys of optional properties.
  * @example

@@ -1,32 +1,32 @@
-import { createSignal, JSX, mergeProps, Show } from 'solid-js'
-import { ParentProps } from 'solid-js/types/render/component'
+import { createSignal, mergeProps, Show } from 'solid-js'
 import './Button.scss'
 import { Gravity } from './Gravity'
 import { OverlayLayout } from './OverlayLayout'
 import { Spinner } from './Spinner'
 import { Arrow } from './utility/others'
-import { joinClass, joinClassList, prepareProps } from './utility/props'
+import { joinClass, joinClassList, prepareProps, SkelProps } from './utility/props'
 
 export function Button(
-  rawProps: ParentProps<
-    JSX.HTMLAttributes<HTMLDivElement> & {
-      tint?: 'primary' | 'achromatic'
-      ghost?: boolean
-      rounded?: boolean
-      disabled?: boolean
-      fullWidth?: boolean
-      onClick?: Arrow<[MouseEvent], unknown> | undefined
-    }
-  >
+  rawProps: SkelProps<{
+    tint?: 'primary' | 'achromatic'
+    ghost?: boolean
+    rounded?: boolean
+    disabled?: boolean
+    fullWidth?: boolean
+    onClick?: Arrow<[MouseEvent], unknown> | undefined
+  }>
 ) {
-  const [props, restProps] = prepareProps(rawProps, {
-    tint: 'primary',
-    ghost: false,
-    rounded: false,
-    disabled: false,
-    fullWidth: false,
-    onClick: undefined,
-  })
+  const [props, restProps] = prepareProps(
+    rawProps,
+    {
+      tint: 'primary',
+      ghost: false,
+      rounded: false,
+      disabled: false,
+      fullWidth: false,
+    },
+    ['onClick']
+  )
   const attrs = mergeProps(restProps, {
     class: joinClass(rawProps.class, 'skel-Button_root'),
     classList: joinClassList(rawProps.classList, {
