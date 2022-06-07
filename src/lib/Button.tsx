@@ -1,5 +1,6 @@
 import { createSignal, mergeProps, Show } from 'solid-js'
 import './Button.scss'
+import './common.scss'
 import { Gravity } from './Gravity'
 import { OverlayLayout } from './OverlayLayout'
 import { Spinner } from './Spinner'
