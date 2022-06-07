@@ -5,6 +5,7 @@ import { Divider } from './lib/Divider'
 import { Spinner } from './lib/Spinner'
 import { StretchLayout } from './lib/StretchLayout'
 import { DividerComponent } from './page/DividerComponent'
+import { GravityComponent } from './page/GravityComponent'
 import { SpinnerComponent } from './page/SpinnerComponent'
 import { StretchLayoutComponent } from './page/StretchLayoutComponent'
 import { SidebarMenu } from './SidebarMenu'
@@ -14,6 +15,7 @@ export function App() {
     ['Divider', DividerComponent],
     ['Spinner', SpinnerComponent],
     ['StretchLayout', StretchLayoutComponent],
+    ['Gravity', GravityComponent],
   ] as const
 
   return (
