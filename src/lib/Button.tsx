@@ -49,7 +49,7 @@ export function Button(
   }
 
   return (
-    <button data-tint={props.tint} disabled={props.disabled} onClick={clickEventHandler} {...attrs}>
+    <button data-tint={props.tint} disabled={props.disabled || isInProgress()} onClick={clickEventHandler} {...attrs}>
       <Show when={isInProgress()} fallback={rawProps.children}>
         <OverlayLayout
           overlay={
