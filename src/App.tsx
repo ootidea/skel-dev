@@ -8,6 +8,7 @@ import { ButtonComponent } from './page/ButtonComponent'
 import { CheckboxComponent } from './page/CheckboxComponent'
 import { DividerComponent } from './page/DividerComponent'
 import { GravityComponent } from './page/GravityComponent'
+import { RadioButtonComponent } from './page/RadioButtonComponent'
 import { SpinnerComponent } from './page/SpinnerComponent'
 import { StretchLayoutComponent } from './page/StretchLayoutComponent'
 import { SidebarMenu } from './SidebarMenu'
@@ -16,6 +17,7 @@ export function App() {
   const pages = [
     ['Button', ButtonComponent],
     ['Checkbox', CheckboxComponent],
+    ['RadioButton', RadioButtonComponent],
     ['Divider', DividerComponent],
     ['Spinner', SpinnerComponent],
     ['StretchLayout', StretchLayoutComponent],
