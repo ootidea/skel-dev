@@ -8,6 +8,7 @@ import { ButtonComponent } from './page/ButtonComponent'
 import { CheckboxComponent } from './page/CheckboxComponent'
 import { DividerComponent } from './page/DividerComponent'
 import { GravityComponent } from './page/GravityComponent'
+import { IconComponent } from './page/IconComponent'
 import { RadioButtonComponent } from './page/RadioButtonComponent'
 import { SpinnerComponent } from './page/SpinnerComponent'
 import { StretchLayoutComponent } from './page/StretchLayoutComponent'
@@ -18,6 +19,7 @@ export function App() {
     ['Button', ButtonComponent],
     ['Checkbox', CheckboxComponent],
     ['RadioButton', RadioButtonComponent],
+    ['Icon', IconComponent],
     ['Divider', DividerComponent],
     ['Spinner', SpinnerComponent],
     ['StretchLayout', StretchLayoutComponent],
