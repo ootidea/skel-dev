@@ -3,14 +3,14 @@ import './common.scss'
 import './Spinner.scss'
 import { joinClass, joinStyle, prepareProps, SkelProps } from './utility/props'
 
-export function Spinner(
-  rawProps: SkelProps<{
-    size?: string
-    thickness?: number
-    frequency?: number
-    inverted?: boolean
-  }>
-) {
+export type SpinnerProps = SkelProps<{
+  size?: string
+  thickness?: number
+  frequency?: number
+  inverted?: boolean
+}>
+
+export function Spinner(rawProps: SpinnerProps) {
   const [props, restProps] = prepareProps(rawProps, {
     size: 'var(--skel-Spinner_default-size)',
     thickness: 25,

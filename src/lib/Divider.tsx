@@ -2,9 +2,9 @@ import { mergeProps } from 'solid-js'
 import './Divider.scss'
 import { joinClass, joinStyle, prepareProps, SkelProps } from './utility/props'
 
-export function Divider(
-  rawProps: SkelProps<{ direction?: 'horizontal' | 'vertical'; thickness?: string; color?: string }>
-) {
+export type DividerProps = SkelProps<{ direction?: 'horizontal' | 'vertical'; thickness?: string; color?: string }>
+
+export function Divider(rawProps: DividerProps) {
   const [props, restProps] = prepareProps(rawProps, {
     direction: 'horizontal',
     thickness: 'var(--skel-Divider_default-thickness)',

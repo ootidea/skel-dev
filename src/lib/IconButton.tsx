@@ -6,19 +6,19 @@ import { Spinner } from './Spinner'
 import { Arrow } from './utility/others'
 import { joinClass, joinClassList, joinStyle, prepareProps, SkelProps } from './utility/props'
 
-export function IconButton(
-  rawProps: SkelProps<
-    {
-      src: string
-      size?: string
-      iconSize?: string
-      iconColor?: string
-      disabledColor?: string
-      onClick?: Arrow<[MouseEvent], unknown>
-    },
-    'button'
-  >
-) {
+export type IconButtonProps = SkelProps<
+  {
+    src: string
+    size?: string
+    iconSize?: string
+    iconColor?: string
+    disabledColor?: string
+    onClick?: Arrow<[MouseEvent], unknown>
+  },
+  'button'
+>
+
+export function IconButton(rawProps: IconButtonProps) {
   const [isInProgress, setIsInProgress] = createSignal(false)
 
   function clickEventHandler(event: MouseEvent) {

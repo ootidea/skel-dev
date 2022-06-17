@@ -7,16 +7,16 @@ import { Spinner } from './Spinner'
 import { Arrow } from './utility/others'
 import { joinClass, joinClassList, prepareProps, SkelProps } from './utility/props'
 
-export function Button(
-  rawProps: SkelProps<{
-    tint?: 'primary' | 'achromatic'
-    ghost?: boolean
-    rounded?: boolean
-    disabled?: boolean
-    fullWidth?: boolean
-    onClick?: Arrow<[MouseEvent], unknown> | undefined
-  }>
-) {
+export type ButtonProps = SkelProps<{
+  tint?: 'primary' | 'achromatic'
+  ghost?: boolean
+  rounded?: boolean
+  disabled?: boolean
+  fullWidth?: boolean
+  onClick?: Arrow<[MouseEvent], unknown> | undefined
+}>
+
+export function Button(rawProps: ButtonProps) {
   const [props, restProps] = prepareProps(
     rawProps,
     {

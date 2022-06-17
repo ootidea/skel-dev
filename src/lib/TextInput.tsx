@@ -4,17 +4,17 @@ import { StretchLayout } from './StretchLayout'
 import './TextInput.scss'
 import { joinClass, joinClassList, SkelProps } from './utility/props'
 
-export function TextInput(
-  rawProps: SkelProps<
-    {
-      prefix?: JSX.Element
-      postfix?: JSX.Element
-      prepend?: JSX.Element
-      append?: JSX.Element
-    },
-    'input'
-  >
-) {
+export type TextInputProps = SkelProps<
+  {
+    prefix?: JSX.Element
+    postfix?: JSX.Element
+    prepend?: JSX.Element
+    append?: JSX.Element
+  },
+  'input'
+>
+
+export function TextInput(rawProps: TextInputProps) {
   const [props, inputElementAttrs] = splitProps(rawProps, [
     'class',
     'classList',

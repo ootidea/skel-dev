@@ -3,12 +3,12 @@ import './Checkbox.scss'
 import { Arrow } from './utility/others'
 import { joinClass, joinClassList, prepareProps, SkelProps } from './utility/props'
 
-export function Checkbox(
-  rawProps: SkelProps<
-    { checked?: boolean; value?: string | undefined; disabled?: boolean; onChange?: Arrow<[boolean, Event], unknown> },
-    'label'
-  >
-) {
+export type CheckboxProps = SkelProps<
+  { checked?: boolean; value?: string | undefined; disabled?: boolean; onChange?: Arrow<[boolean, Event], unknown> },
+  'label'
+>
+
+export function Checkbox(rawProps: CheckboxProps) {
   const [props, restProps] = prepareProps(
     rawProps,
     {

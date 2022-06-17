@@ -2,7 +2,9 @@ import { mergeProps } from 'solid-js'
 import './Icon.scss'
 import { joinClass, joinStyle, prepareProps, SkelProps } from './utility/props'
 
-export function Icon(rawProps: SkelProps<{ src: string; size?: string; color?: string }>) {
+export type IconProps = SkelProps<{ src: string; size?: string; color?: string }>
+
+export function Icon(rawProps: IconProps) {
   const [props, restProps] = prepareProps(
     rawProps,
     {

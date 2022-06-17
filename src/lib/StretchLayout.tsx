@@ -2,9 +2,9 @@ import { mergeProps } from 'solid-js'
 import './StretchLayout.scss'
 import { joinClass, joinStyle, prepareProps, SkelProps } from './utility/props'
 
-export function StretchLayout(
-  rawProps: SkelProps<{ stretchAt?: number | `${number}`; direction?: 'horizontal' | 'vertical' }>
-) {
+export type StretchLayoutProps = SkelProps<{ stretchAt?: number | `${number}`; direction?: 'horizontal' | 'vertical' }>
+
+export function StretchLayout(rawProps: StretchLayoutProps) {
   const [props, restProps] = prepareProps(rawProps, {
     stretchAt: 0,
     direction: 'horizontal',

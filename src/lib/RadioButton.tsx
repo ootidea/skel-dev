@@ -3,13 +3,13 @@ import './common.scss'
 import './RadioButton.scss'
 import { joinClass, joinClassList, prepareProps, SkelProps } from './utility/props'
 
-export function RadioButton(
-  rawProps: SkelProps<{
-    value?: string | undefined
-    name?: string | undefined
-    disabled?: boolean
-  }>
-) {
+export type RadioButtonProps = SkelProps<{
+  value?: string | undefined
+  name?: string | undefined
+  disabled?: boolean
+}>
+
+export function RadioButton(rawProps: RadioButtonProps) {
   const [props, restProps] = prepareProps(rawProps, {
     value: undefined,
     name: undefined,
