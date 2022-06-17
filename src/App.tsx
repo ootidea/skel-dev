@@ -10,6 +10,7 @@ import { DividerComponent } from './page/DividerComponent'
 import { GravityComponent } from './page/GravityComponent'
 import { IconButtonComponent } from './page/IconButtonComponent'
 import { IconComponent } from './page/IconComponent'
+import { LayerLayoutComponent } from './page/LayerLayoutComponent'
 import { RadioButtonComponent } from './page/RadioButtonComponent'
 import { SpinnerComponent } from './page/SpinnerComponent'
 import { StretchLayoutComponent } from './page/StretchLayoutComponent'
@@ -27,6 +28,7 @@ export function App() {
     ['Divider', DividerComponent],
     ['Spinner', SpinnerComponent],
     ['StretchLayout', StretchLayoutComponent],
+    ['LayerLayout', LayerLayoutComponent],
     ['Gravity', GravityComponent],
   ] as const
 
