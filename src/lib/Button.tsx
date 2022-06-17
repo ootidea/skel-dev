@@ -2,7 +2,7 @@ import { createSignal, mergeProps, Show } from 'solid-js'
 import './Button.scss'
 import './common.scss'
 import { Gravity } from './Gravity'
-import { OverlayLayout } from './OverlayLayout'
+import { LayerLayout } from './LayerLayout'
 import { Spinner } from './Spinner'
 import { Arrow } from './utility/others'
 import { joinClass, joinClassList, prepareProps, SkelProps } from './utility/props'
@@ -51,15 +51,12 @@ export function Button(rawProps: ButtonProps) {
   return (
     <button data-tint={props.tint} disabled={props.disabled || isInProgress()} onClick={clickEventHandler} {...attrs}>
       <Show when={isInProgress()} fallback={rawProps.children}>
-        <OverlayLayout
-          overlay={
-            <Gravity>
-              <Spinner inverted={!props.ghost} />
-            </Gravity>
-          }
-        >
+        <LayerLayout>
           <div class="skel-Button_invisible">{rawProps.children}</div>
-        </OverlayLayout>
+          <Gravity>
+            <Spinner inverted={!props.ghost} />
+          </Gravity>
+        </LayerLayout>
       </Show>
     </button>
   )

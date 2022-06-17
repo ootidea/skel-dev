@@ -1,3 +1,5 @@
+import { JSX } from 'solid-js'
+
 /**
  * A utility for abbreviating function types.
  * @example
@@ -110,4 +112,10 @@ export function toXPercent(position: EnneaPosition): `${number}%` {
 export function toYPercent(position: EnneaPosition): `${number}%` {
   const mapping = { top: '0%', center: '50%', bottom: '100%' } as const
   return mapping[toVerticalPosition(position)]
+}
+
+export function toArray(children: JSX.Element): JSX.Element[] {
+  if (children instanceof Array) return children
+
+  return [children]
 }
