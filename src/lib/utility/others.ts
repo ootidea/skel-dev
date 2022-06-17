@@ -25,7 +25,7 @@ export function mapUndefined<T, U>(value: T | undefined, f: Arrow<[T], U>): U | 
 /**
  * Object.keys with improved type.
  * @example
- * keys({ alice: 'female', 123: null, [Symbol()]: true })
+ * objectKeys({ alice: 'female', 123: null, [Symbol()]: true })
  * is equivalent to
  * Object.keys({ alice: 'female', 123: null, [Symbol()]: true }) as ('alice' | '123')[]
  */
