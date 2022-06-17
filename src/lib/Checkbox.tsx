@@ -6,7 +6,7 @@ import { joinClass, joinClassList, prepareProps, SkelProps } from './utility/pro
 export function Checkbox(
   rawProps: SkelProps<
     { checked?: boolean; value?: string | undefined; disabled?: boolean; onChange?: Arrow<[boolean, Event], unknown> },
-    HTMLLabelElement
+    'label'
   >
 ) {
   const [props, restProps] = prepareProps(
