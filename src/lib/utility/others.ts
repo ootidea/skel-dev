@@ -114,6 +114,15 @@ export function toYPercent(position: EnneaPosition): `${number}%` {
   return mapping[toVerticalPosition(position)]
 }
 
+export function isInsideOf(x: number, y: number, rect: DOMRect): boolean {
+  if (x < rect.left) return false
+  if (rect.right < x) return false
+  if (y < rect.top) return false
+  if (rect.bottom < y) return false
+
+  return true
+}
+
 export function toArray(children: JSX.Element): JSX.Element[] {
   if (children instanceof Array) return children
 

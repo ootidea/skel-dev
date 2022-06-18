@@ -1,0 +1,21 @@
+.skel-Popover_root {
+  position: relative;
+  width: max-content;
+}
+
+.skel-Popover_popover-area {
+  position: absolute;
+  left: var(--skel-Popover_left);
+  top: var(--skel-Popover_top);
+  transform: var(--skel-Popover_transform);
+
+  width: max-content;
+
+  z-index: var(--skel-popover-z-index);
+}
+
+.skel-Popover_popover-frame {
+  background-color: var(--skel-background-color);
+  border-radius: 0.4em;
+  box-shadow: 0 1px 4px oklch(75% 0 0);
+}
