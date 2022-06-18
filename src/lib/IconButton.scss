@@ -6,7 +6,7 @@
 
 .skel-IconButton_root {
   border: none;
-  background-color: transparent;
+  background-color: var(--skel-IconButton_background-color);
   padding: 0;
   font: inherit;
 
@@ -29,12 +29,12 @@
     cursor: pointer;
 
     &:hover {
-      background-color: var(--skel-clickable-hover-background-color);
+      background-color: var(--skel-IconButton_background-hover-color);
       transition: var(--skel-forward-transition);
     }
 
     &:active {
-      background-color: var(--skel-clickable-active-background-color);
+      background-color: var(--skel-IconButton_background-active-color);
       transition: var(--skel-forward-transition);
     }
   }

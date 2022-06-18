@@ -3,6 +3,7 @@ import { Gravity } from './Gravity'
 import { Icon } from './Icon'
 import './IconButton.scss'
 import { Spinner } from './Spinner'
+import { calculateActiveColor, calculateHoverColor, toHsl } from './utility/color'
 import { Arrow } from './utility/others'
 import { joinClass, joinClassList, joinStyle, prepareProps, SkelProps } from './utility/props'
 
@@ -12,6 +13,7 @@ export type IconButtonProps = SkelProps<
     size?: string
     iconSize?: string
     iconColor?: string
+    backgroundColor?: string
     disabledColor?: string
     onClick?: Arrow<[MouseEvent], unknown>
   },
@@ -25,6 +27,7 @@ export function IconButton(rawProps: IconButtonProps) {
       size: 'var(--skel-IconButton_default-size)',
       iconSize: 'var(--skel-IconButton_icon-default-size)',
       iconColor: 'var(--skel-Icon_default-color)',
+      backgroundColor: 'transparent',
       disabledColor: 'var(--skel-IconButton_disabled-default-color)',
     },
     ['src', 'onClick']
@@ -37,6 +40,9 @@ export function IconButton(rawProps: IconButtonProps) {
     style: joinStyle(rawProps.style, {
       '--skel-IconButton_size': props.size,
       '--skel-IconButton_icon-size': props.iconSize,
+      '--skel-IconButton_background-color': toHsl(props.backgroundColor),
+      '--skel-IconButton_background-hover-color': calculateHoverColor(props.backgroundColor),
+      '--skel-IconButton_background-active-color': calculateActiveColor(props.backgroundColor),
     }),
   })
 

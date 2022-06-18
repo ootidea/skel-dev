@@ -12,6 +12,7 @@
     "serve": "vite preview"
   },
   "dependencies": {
+    "colorjs.io": "^0.0.7",
     "solid-js": "^1.4.2"
   },
   "devDependencies": {
