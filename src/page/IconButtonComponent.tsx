@@ -25,6 +25,12 @@ export function IconButtonComponent() {
         <IconButton src="/src/chevron-right.svg" iconColor="hsl(180, 60%, 40%)" />
       </Sample>
 
+      <SectionTitle>Background color</SectionTitle>
+      <Sample direction="horizontal">
+        <IconButton src="/src/chevron-left.svg" backgroundColor="hsl(0 0% 90%)" />
+        <IconButton src="/src/chevron-right.svg" backgroundColor="hsl(0 0% 90%)" />
+      </Sample>
+
       <SectionTitle>Button size</SectionTitle>
       <Sample direction="horizontal">
         <IconButton src="/src/chevron-left.svg" size="40px" />
