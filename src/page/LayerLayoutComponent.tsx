@@ -13,7 +13,7 @@ export function LayerLayoutComponent() {
       <SectionTitle>Badge</SectionTitle>
       <Sample>
         <LayerLayout>
-          <IconButton src="/src/chevron-left.svg" size="3em" />
+          <IconButton src="/src/search.svg" size="3em" />
           <Gravity to="top right">
             <Gravity
               style={{
@@ -47,8 +47,8 @@ export function LayerLayoutComponent() {
               'pointer-events': 'auto',
             }}
           >
-            <IconButton src="/src/chevron-left.svg" size="2.5em" />
-            <IconButton src="/src/chevron-right.svg" size="2.5em" />
+            <IconButton src="/src/chevron-left.svg" size="2em" iconColor="white" backgroundColor="hsl(0 0% 40% 0.5)" />
+            <IconButton src="/src/chevron-right.svg" size="2em" iconColor="white" backgroundColor="hsl(0 0% 40% 0.5)" />
           </div>
         </LayerLayout>
       </Sample>
