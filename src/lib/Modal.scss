@@ -1,0 +1,25 @@
+.skel-Modal_root {
+  position: fixed;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  right: 0;
+  z-index: var(--skel-modal-z-index);
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  background-color: oklch(0% 0 0 / 20%);
+}
+
+.skel-Modal_frame {
+  background-color: var(--skel-background-color);
+  max-height: 90vh;
+  max-width: 90vw;
+
+  border-radius: 0.5rem;
+  box-shadow: 0 3px 14px oklch(0% 0 0 / 20%);
+
+  overflow: auto;
+}

@@ -1,12 +1,22 @@
 import { ComponentProps, JSX, mergeProps, splitProps } from 'solid-js'
 import { Component } from 'solid-js/types/render/component'
-import { objectKeys } from './others'
+import { Arrow, objectKeys } from './others'
 
 export type SkelProps<T, Base extends keyof JSX.IntrinsicElements | Component<any> = 'div'> = Omit<
   ComponentProps<Base>,
   keyof T
 > &
   T
+
+export type SkelSlot<T> = JSX.Element | Arrow<[T], JSX.Element>
+
+export function deploySlot<T>(slot: SkelSlot<T>, params: T): JSX.Element {
+  if (slot instanceof Function) {
+    return slot(params)
+  } else {
+    return slot
+  }
+}
 
 /**
  * Return string literal union type that is keys of optional properties.
