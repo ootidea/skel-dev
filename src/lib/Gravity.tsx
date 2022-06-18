@@ -8,7 +8,7 @@ export type GravityProps = SkelProps<{ to?: EnneaPosition }>
 export function Gravity(rawProps: GravityProps) {
   const [props, restProps] = prepareProps(rawProps, {
     to: 'center',
-  } as const)
+  })
   const attrs = mergeProps(restProps, {
     class: joinClass(rawProps.class, 'skel-Gravity_root'),
   })

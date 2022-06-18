@@ -34,7 +34,7 @@ export type OptionalKeys<T> = { [K in keyof T]-?: T extends Record<K, any> ? nev
  * is equivalent to
  * { a: string }
  */
-type DefaultValues<T> = Pick<Required<T>, OptionalKeys<T>>
+type DefaultValues<T> = Required<Pick<T, OptionalKeys<T>>>
 
 /**
  * Splits given object type into single property and returns its union type.
@@ -55,11 +55,11 @@ export type AtLeastOneProperty<T, K extends keyof T = keyof T> = K extends K ? R
  * is the same value as
  * [{ tint: 'red', size: '1em' }, { tabindex: '0' }]
  */
-export function prepareProps<T, U extends AtLeastOneProperty<DefaultValues<T>>>(
+export function prepareProps<T, U extends Pick<T, OptionalKeys<T>>>(
   rawProps: T,
   defaultValues: U,
   otherKnownKeys: (keyof T)[] = []
-): [U & T, {}] {
+): [T & Required<Pick<T, keyof T & keyof U>>, {}] {
   // Difficult to type accurately because keyof T equals string | number | Symbol but Object.keys returns string[]
   const keys = objectKeys(defaultValues) as any
   return splitProps(mergeProps(defaultValues, rawProps), otherKnownKeys.concat(keys)) as any

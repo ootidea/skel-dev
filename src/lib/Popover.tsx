@@ -14,7 +14,7 @@ export type PopoverProps = SkelProps<{
 export function Popover(rawProps: PopoverProps) {
   const [props, restProps] = prepareProps(rawProps, {
     on: 'bottom',
-    joint: undefined as EnneaPosition | undefined,
+    joint: undefined,
     persistent: false,
   })
   const attrs = mergeProps(restProps, {

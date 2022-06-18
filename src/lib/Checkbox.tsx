@@ -13,7 +13,7 @@ export function Checkbox(rawProps: CheckboxProps) {
     rawProps,
     {
       checked: false,
-      value: undefined as string | undefined,
+      value: undefined,
       disabled: false,
     },
     ['onChange']
