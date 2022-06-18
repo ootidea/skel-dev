@@ -1,4 +1,4 @@
-// @ts-ignore
+// @ts-ignore colorjs.io does not support TypeScript
 import Color from 'colorjs.io'
 
 export function toHsl(color: string): string {
