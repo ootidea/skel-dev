@@ -1,27 +1,29 @@
-import { createSignal, mergeProps, Show } from 'solid-js'
+import { createSignal, mergeProps, Show, Signal } from 'solid-js'
 import './common.scss'
 import './Modal.scss'
 import { deploySlot, joinClass, prepareProps, SkelProps, SkelSlot } from './utility/props'
 
 export type ModalProps = SkelProps<{
+  openedSignal?: Signal<boolean>
   persistent?: boolean
   launcher?: SkelSlot<{ open: () => void; close: () => void; toggle: () => void }>
   children?: SkelSlot<{ open: () => void; close: () => void; toggle: () => void }>
 }>
 
 export function Modal(rawProps: ModalProps) {
-  const [opened, setOpened] = createSignal(false)
-
   const [props, restProps] = prepareProps(
     rawProps,
     {
       persistent: false,
+      openedSignal: createSignal(false),
     },
     ['launcher']
   )
   const attrs = mergeProps(restProps, {
     class: joinClass(rawProps.class, 'skel-Modal_root'),
   })
+
+  const [opened, setOpened] = props.openedSignal
 
   const open = () => setOpened(true)
   const close = () => setOpened(false)
