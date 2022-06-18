@@ -10,33 +10,35 @@ const MIDDLE_LIGHTNESS = 0.75
 export function calculateHoverColor(baseColor: string): string {
   const color = new Color(baseColor)
   if (color.alpha === 0) {
-    return new Color('oklch', [MIDDLE_LIGHTNESS, 0, 0, 0.2]).to('hsl').toString()
+    const transparentColor = new Color('oklch', [MIDDLE_LIGHTNESS, 0, 0])
+    transparentColor.alpha = 0.2
+    return transparentColor.to('hsl').toString()
   }
 
-  color.alpha = Math.min(1, color.alpha * 1.5)
+  const ratio = Math.pow(0.95, 1 / color.alpha)
 
   if (color.oklch.lightness > MIDDLE_LIGHTNESS) {
-    color.oklch.lightness = Math.max(MIDDLE_LIGHTNESS, color.oklch.lightness * 0.96)
+    color.oklch.lightness = color.oklch.lightness * ratio
   } else {
-    color.oklch.lightness = Math.min(MIDDLE_LIGHTNESS, color.oklch.lightness / 0.96)
+    color.oklch.lightness = color.oklch.lightness / ratio
   }
-
   return color.to('hsl').toString()
 }
 
 export function calculateActiveColor(baseColor: string): string {
   const color = new Color(baseColor)
   if (color.alpha === 0) {
-    return new Color('oklch', [MIDDLE_LIGHTNESS, 0, 0, 0.3]).to('hsl').toString()
+    const transparentColor = new Color('oklch', [MIDDLE_LIGHTNESS, 0, 0])
+    transparentColor.alpha = 0.3
+    return transparentColor.to('hsl').toString()
   }
 
-  color.alpha = Math.min(1, color.alpha * 2)
+  const ratio = Math.pow(0.9, 1 / color.alpha)
 
   if (color.oklch.lightness > MIDDLE_LIGHTNESS) {
-    color.oklch.lightness = Math.max(MIDDLE_LIGHTNESS, color.oklch.lightness * 0.92)
+    color.oklch.lightness = color.oklch.lightness * ratio
   } else {
-    color.oklch.lightness = Math.min(MIDDLE_LIGHTNESS, color.oklch.lightness / 0.92)
+    color.oklch.lightness = color.oklch.lightness / ratio
   }
-
   return color.to('hsl').toString()
 }
