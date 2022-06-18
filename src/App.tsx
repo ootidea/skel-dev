@@ -12,6 +12,7 @@ import { IconButtonComponent } from './page/IconButtonComponent'
 import { IconComponent } from './page/IconComponent'
 import { LayerLayoutComponent } from './page/LayerLayoutComponent'
 import { ModalComponent } from './page/ModalComponent'
+import { PopoverComponent } from './page/PopoverComponent'
 import { RadioButtonComponent } from './page/RadioButtonComponent'
 import { SpinnerComponent } from './page/SpinnerComponent'
 import { StretchLayoutComponent } from './page/StretchLayoutComponent'
@@ -32,6 +33,7 @@ export function App() {
     ['LayerLayout', LayerLayoutComponent],
     ['Gravity', GravityComponent],
     ['Modal', ModalComponent],
+    ['Popover', PopoverComponent],
   ] as const
 
   return (
