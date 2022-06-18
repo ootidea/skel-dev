@@ -19,18 +19,6 @@ export type IconButtonProps = SkelProps<
 >
 
 export function IconButton(rawProps: IconButtonProps) {
-  const [isInProgress, setIsInProgress] = createSignal(false)
-
-  function clickEventHandler(event: MouseEvent) {
-    if (isInProgress()) return
-
-    const promise = rawProps.onClick?.(event)
-    if (promise instanceof Promise) {
-      setIsInProgress(true)
-      promise.finally(() => setIsInProgress(false))
-    }
-  }
-
   const [props, restProps] = prepareProps(
     rawProps,
     {
@@ -51,6 +39,19 @@ export function IconButton(rawProps: IconButtonProps) {
       '--skel-IconButton_icon-size': props.iconSize,
     }),
   })
+
+  const [isInProgress, setIsInProgress] = createSignal(false)
+
+  function clickEventHandler(event: MouseEvent) {
+    if (isInProgress()) return
+
+    const promise = rawProps.onClick?.(event)
+    if (promise instanceof Promise) {
+      setIsInProgress(true)
+      promise.finally(() => setIsInProgress(false))
+    }
+  }
+
   return (
     <button onClick={clickEventHandler} {...attrs}>
       {isInProgress() ? (
