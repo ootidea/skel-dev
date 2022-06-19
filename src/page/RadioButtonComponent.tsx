@@ -5,7 +5,7 @@ import { Sample } from '../Sample'
 export function RadioButtonComponent() {
   return (
     <article>
-      <PageTitle>Checkbox</PageTitle>
+      <PageTitle>RadioButton</PageTitle>
 
       <Sample direction="horizontal">
         <RadioButton name="type" value="Dog" />
