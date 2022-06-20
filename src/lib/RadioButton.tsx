@@ -1,7 +1,7 @@
 import { mergeProps } from 'solid-js'
 import './common.scss'
 import './RadioButton.scss'
-import { joinClass, joinClassList, prepareProps, SkelProps } from './utility/props'
+import { joinClass, joinClassList, prepareProps, SkelProps, toGetters } from './utility/props'
 
 export type RadioButtonProps = SkelProps<{
   value?: string | undefined
@@ -15,12 +15,16 @@ export function RadioButton(rawProps: RadioButtonProps) {
     name: undefined,
     disabled: false,
   })
-  const attrs = mergeProps(restProps, {
-    class: joinClass(rawProps.class, 'skel-RadioButton_root'),
-    classList: joinClassList(rawProps.classList, {
-      'skel-RadioButton_disabled': props.disabled,
-    }),
-  })
+  const attrs = mergeProps(
+    restProps,
+    toGetters({
+      class: () => joinClass(rawProps.class, 'skel-RadioButton_root'),
+      classList: () =>
+        joinClassList(rawProps.classList, {
+          'skel-RadioButton_disabled': props.disabled,
+        }),
+    })
+  )
 
   return (
     <label {...attrs}>

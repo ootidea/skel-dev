@@ -1,14 +1,17 @@
 import { For, mergeProps } from 'solid-js'
 import './LayerLayout.scss'
 import { toArray } from './utility/others'
-import { joinClass, SkelProps } from './utility/props'
+import { joinClass, SkelProps, toGetters } from './utility/props'
 
 export type LayerLayoutProps = SkelProps<{}>
 
 export function LayerLayout(rawProps: LayerLayoutProps) {
-  const attrs = mergeProps(rawProps, {
-    class: joinClass(rawProps.class, 'skel-LayerLayout_root'),
-  })
+  const attrs = mergeProps(
+    rawProps,
+    toGetters({
+      class: () => joinClass(rawProps.class, 'skel-LayerLayout_root'),
+    })
+  )
 
   return (
     <div {...attrs}>

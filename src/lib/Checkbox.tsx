@@ -1,7 +1,7 @@
 import { mergeProps } from 'solid-js'
 import './Checkbox.scss'
 import { Arrow } from './utility/others'
-import { joinClass, joinClassList, prepareProps, SkelProps } from './utility/props'
+import { joinClass, joinClassList, prepareProps, SkelProps, toGetters } from './utility/props'
 
 export type CheckboxProps = SkelProps<
   { checked?: boolean; value?: string | undefined; disabled?: boolean; onChange?: Arrow<[boolean, Event], unknown> },
@@ -18,10 +18,13 @@ export function Checkbox(rawProps: CheckboxProps) {
     },
     ['onChange']
   )
-  const attrs = mergeProps(restProps, {
-    class: joinClass(rawProps.class, 'skel-Checkbox_root'),
-    classList: joinClassList(rawProps.classList, { 'skel-Checkbox_disabled': props.disabled }),
-  })
+  const attrs = mergeProps(
+    restProps,
+    toGetters({
+      class: () => joinClass(rawProps.class, 'skel-Checkbox_root'),
+      classList: () => joinClassList(rawProps.classList, { 'skel-Checkbox_disabled': props.disabled }),
+    })
+  )
 
   function onChange(event: Event) {
     if (event.target instanceof HTMLInputElement) {

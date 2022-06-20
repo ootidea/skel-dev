@@ -5,7 +5,7 @@ import { Gravity } from './Gravity'
 import { LayerLayout } from './LayerLayout'
 import { Spinner } from './Spinner'
 import { Arrow } from './utility/others'
-import { joinClass, joinClassList, prepareProps, SkelProps } from './utility/props'
+import { joinClass, joinClassList, prepareProps, SkelProps, toGetters } from './utility/props'
 
 export type ButtonProps = SkelProps<{
   tint?: 'primary' | 'achromatic'
@@ -28,15 +28,19 @@ export function Button(rawProps: ButtonProps) {
     },
     ['onClick']
   )
-  const attrs = mergeProps(restProps, {
-    class: joinClass(rawProps.class, 'skel-Button_root'),
-    classList: joinClassList(rawProps.classList, {
-      'skel-Button_ghost': props.ghost,
-      'skel-Button_rounded': props.rounded,
-      'skel-Button_disabled': props.disabled,
-      'skel-Button_full-width': props.fullWidth,
-    }),
-  })
+  const attrs = mergeProps(
+    restProps,
+    toGetters({
+      class: () => joinClass(rawProps.class, 'skel-Button_root'),
+      classList: () =>
+        joinClassList(rawProps.classList, {
+          'skel-Button_ghost': props.ghost,
+          'skel-Button_rounded': props.rounded,
+          'skel-Button_disabled': props.disabled,
+          'skel-Button_full-width': props.fullWidth,
+        }),
+    })
+  )
 
   const [isInProgress, setIsInProgress] = createSignal(false)
 

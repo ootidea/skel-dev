@@ -1,7 +1,7 @@
 import { createMemo, mergeProps } from 'solid-js'
 import './common.scss'
 import './Spinner.scss'
-import { joinClass, joinStyle, prepareProps, SkelProps } from './utility/props'
+import { joinClass, joinStyle, prepareProps, SkelProps, toGetters } from './utility/props'
 
 export type SpinnerProps = SkelProps<{
   size?: string
@@ -25,15 +25,19 @@ export function Spinner(rawProps: SpinnerProps) {
       }" fill="none" stroke="black" stroke-width="${props.thickness}" /></svg>')`
   )
 
-  const attrs = mergeProps(restProps, {
-    class: joinClass(rawProps.class, 'skel-Spinner_root'),
-    style: joinStyle(rawProps.style, {
-      '--skel-Spinner_size': props.size,
-      '--skel-Spinner_svg-url': svgUrl(),
-      '--skel-Spinner_period': `${1 / props.frequency}s`,
-      '--skel-Spinner_color': props.inverted ? 'var(--skel-inverted-text-color)' : 'var(--skel-primary-color)',
-    }),
-  })
+  const attrs = mergeProps(
+    restProps,
+    toGetters({
+      class: () => joinClass(rawProps.class, 'skel-Spinner_root'),
+      style: () =>
+        joinStyle(rawProps.style, {
+          '--skel-Spinner_size': props.size,
+          '--skel-Spinner_svg-url': svgUrl(),
+          '--skel-Spinner_period': `${1 / props.frequency}s`,
+          '--skel-Spinner_color': props.inverted ? 'var(--skel-inverted-text-color)' : 'var(--skel-primary-color)',
+        }),
+    })
+  )
 
   return <div {...attrs} />
 }

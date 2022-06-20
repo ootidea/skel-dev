@@ -5,7 +5,7 @@ import './IconButton.scss'
 import { Spinner } from './Spinner'
 import { calculateActiveColor, calculateHoverColor, toHsl } from './utility/color'
 import { Arrow } from './utility/others'
-import { joinClass, joinClassList, joinStyle, prepareProps, SkelProps } from './utility/props'
+import { joinClass, joinClassList, joinStyle, prepareProps, SkelProps, toGetters } from './utility/props'
 
 export type IconButtonProps = SkelProps<
   {
@@ -32,19 +32,24 @@ export function IconButton(rawProps: IconButtonProps) {
     },
     ['src', 'onClick']
   )
-  const attrs = mergeProps(restProps, {
-    class: joinClass(rawProps.class, 'skel-IconButton_root'),
-    classList: joinClassList(rawProps.classList, {
-      'skel-IconButton_disabled': rawProps.disabled,
-    }),
-    style: joinStyle(rawProps.style, {
-      '--skel-IconButton_size': props.size,
-      '--skel-IconButton_icon-size': props.iconSize,
-      '--skel-IconButton_background-color': toHsl(props.backgroundColor),
-      '--skel-IconButton_background-hover-color': calculateHoverColor(props.backgroundColor),
-      '--skel-IconButton_background-active-color': calculateActiveColor(props.backgroundColor),
-    }),
-  })
+  const attrs = mergeProps(
+    restProps,
+    toGetters({
+      class: () => joinClass(rawProps.class, 'skel-IconButton_root'),
+      classList: () =>
+        joinClassList(rawProps.classList, {
+          'skel-IconButton_disabled': rawProps.disabled,
+        }),
+      style: () =>
+        joinStyle(rawProps.style, {
+          '--skel-IconButton_size': props.size,
+          '--skel-IconButton_icon-size': props.iconSize,
+          '--skel-IconButton_background-color': toHsl(props.backgroundColor),
+          '--skel-IconButton_background-hover-color': calculateHoverColor(props.backgroundColor),
+          '--skel-IconButton_background-active-color': calculateActiveColor(props.backgroundColor),
+        }),
+    })
+  )
 
   const [isInProgress, setIsInProgress] = createSignal(false)
 
