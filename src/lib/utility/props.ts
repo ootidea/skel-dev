@@ -10,12 +10,29 @@ export type SkelProps<T, Base extends keyof JSX.IntrinsicElements | Component<an
 
 export type SkelSlot<T> = JSX.Element | Arrow<[T], JSX.Element>
 
+/** @deprecated Use Slot component. */
 export function deploySlot<T>(slot: SkelSlot<T>, params: T): JSX.Element {
   if (slot instanceof Function) {
     return slot(params)
   } else {
     return slot
   }
+}
+
+/**
+ * Convert all nullary function properties to getters immutably.
+ * TODO: Define return type.
+ */
+export function toGetters<T extends Record<string, () => unknown>>(functions: T) {
+  const result = {}
+  for (const objectKey of objectKeys(functions)) {
+    Object.defineProperty(result, objectKey, {
+      get: functions[objectKey],
+      enumerable: true,
+      configurable: true,
+    })
+  }
+  return result
 }
 
 /**
