@@ -1,7 +1,8 @@
 import { createSignal, mergeProps, onCleanup, onMount, Show } from 'solid-js'
 import './Popover.scss'
+import { Slot } from './Slot'
 import { EnneaPosition, isInsideOf, toOpposite, toXPercent, toYPercent } from './utility/others'
-import { deploySlot, joinClass, joinStyle, prepareProps, SkelProps, SkelSlot } from './utility/props'
+import { joinClass, joinStyle, prepareProps, SkelProps, SkelSlot } from './utility/props'
 
 export type PopoverProps = SkelProps<{
   on?: EnneaPosition
@@ -63,11 +64,13 @@ export function Popover(rawProps: PopoverProps) {
   return (
     <div {...attrs}>
       <div class="skel-Popover_content-area" ref={contentElement}>
-        {deploySlot(rawProps.launcher, { open, close, toggle })}
+        <Slot content={rawProps.launcher} params={{ open, close, toggle }} />
       </div>
       <Show when={opened()}>
         <div class="skel-Popover_popover-area" ref={popoverElement}>
-          <div class="skel-Popover_popover-frame">{deploySlot(rawProps.children, { open, close, toggle })}</div>
+          <div class="skel-Popover_popover-frame">
+            <Slot content={rawProps.children} params={{ open, close, toggle }} />
+          </div>
         </div>
       </Show>
     </div>

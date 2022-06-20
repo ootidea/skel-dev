@@ -10,15 +10,6 @@ export type SkelProps<T, Base extends keyof JSX.IntrinsicElements | Component<an
 
 export type SkelSlot<T> = JSX.Element | Arrow<[T], JSX.Element>
 
-/** @deprecated Use Slot component. */
-export function deploySlot<T>(slot: SkelSlot<T>, params: T): JSX.Element {
-  if (slot instanceof Function) {
-    return slot(params)
-  } else {
-    return slot
-  }
-}
-
 /**
  * Convert all nullary function properties to getters immutably.
  * TODO: Define return type.

@@ -1,7 +1,8 @@
 import { createSignal, mergeProps, Show, Signal } from 'solid-js'
 import './common.scss'
 import './Modal.scss'
-import { deploySlot, joinClass, prepareProps, SkelProps, SkelSlot } from './utility/props'
+import { Slot } from './Slot'
+import { joinClass, prepareProps, SkelProps, SkelSlot } from './utility/props'
 
 export type ModalProps = SkelProps<{
   openedSignal?: Signal<boolean>
@@ -39,10 +40,12 @@ export function Modal(rawProps: ModalProps) {
 
   return (
     <>
-      {deploySlot(rawProps.launcher, { open, close, toggle })}
+      <Slot content={rawProps.launcher} params={{ open, close, toggle }} />
       <Show when={opened()}>
         <div onClick={onClickBackdrop} {...attrs}>
-          <div class="skel-Modal_frame">{deploySlot(rawProps.children, { open, close, toggle })}</div>
+          <div class="skel-Modal_frame">
+            <Slot content={rawProps.children} params={{ open, close, toggle }} />
+          </div>
         </div>
       </Show>
     </>
