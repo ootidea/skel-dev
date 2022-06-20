@@ -7,7 +7,7 @@ export function GravityComponent() {
     <article>
       <PageTitle>Gravity</PageTitle>
       <Sample>
-        <div style={{ width: '100%', height: '123px' }}>
+        <div style={{ width: '20rem', height: '10rem', border: '1px dashed gray' }}>
           <Gravity>center</Gravity>
         </div>
       </Sample>
