@@ -1,4 +1,4 @@
-import { JSX } from 'solid-js'
+import { JSX, onCleanup } from 'solid-js'
 
 /**
  * A utility for abbreviating function types.
@@ -7,6 +7,16 @@ import { JSX } from 'solid-js'
  * Arrow<[string, Date], void> is equivalent to (value1: string, value2: Date) => void
  */
 export type Arrow<Tuple extends unknown[], Return> = (...args: Tuple) => Return
+
+/**
+ * Assert that a value is not undefined.
+ * Throws an exception if it is undefined.
+ */
+export function assertNonUndefined<T>(value: T | undefined, message?: string): asserts value is T {
+  if (value === undefined) {
+    throw new Error(message ?? 'Assertion error: the given value is undefined.')
+  }
+}
 
 /**
  * Clone given array, and remove all undefined.
@@ -127,4 +137,22 @@ export function toArray(children: JSX.Element): JSX.Element[] {
   if (children instanceof Array) return children
 
   return [children]
+}
+
+/**
+ * This function is used as a Svelte use directive, that callback the width of an element reactively.
+ * This was defined because svelte's bind:clientWidth may not reflect the actual value.
+ * @example
+ * <div use:observeWidth={(width) => (clientWidth = width)} />
+ */
+export function observeWidth(element: HTMLElement, callback: (width: number) => unknown) {
+  callback(element.getBoundingClientRect().width)
+  const resizeObserver = new ResizeObserver(() => {
+    callback(element.getBoundingClientRect().width)
+  })
+  resizeObserver.observe(element)
+
+  onCleanup(() => {
+    resizeObserver.unobserve(element)
+  })
 }

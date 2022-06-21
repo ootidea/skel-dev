@@ -7,6 +7,7 @@ import { StretchLayout } from './lib/StretchLayout'
 import { ButtonComponent } from './page/ButtonComponent'
 import { CheckboxComponent } from './page/CheckboxComponent'
 import { DividerComponent } from './page/DividerComponent'
+import { DropdownComponent } from './page/DropdownComponent'
 import { FoldableComponent } from './page/FoldableComponent'
 import { GravityComponent } from './page/GravityComponent'
 import { IconButtonComponent } from './page/IconButtonComponent'
@@ -34,6 +35,7 @@ export function App() {
     ['LayerLayout', LayerLayoutComponent],
     ['Gravity', GravityComponent],
     ['Modal', ModalComponent],
+    ['Dropdown', DropdownComponent],
     ['Popover', PopoverComponent],
     ['Foldable', FoldableComponent],
   ] as const

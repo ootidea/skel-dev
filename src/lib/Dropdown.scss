@@ -1,0 +1,32 @@
+.skel-Dropdown_root {
+  position: relative;
+  width: max-content;
+}
+
+.skel-Dropdown_content-area {
+  min-width: var(--skel-Dropdown_dropdown-width);
+}
+
+.skel-Dropdown_dropdown-area {
+  position: absolute;
+
+  width: max-content;
+  min-width: var(--skel-Dropdown_content-width);
+
+  z-index: var(--skel-dropdown-z-index);
+
+  &.skel-Dropdown_invisible {
+    visibility: hidden;
+    // To hide CSS transition
+    height: 0;
+    overflow: hidden;
+  }
+}
+
+.skel-Dropdown_frame {
+  background-color: var(--skel-background-color);
+  border-radius: 0.4em;
+  box-shadow: 0 1px 4px oklch(75% 0 0);
+
+  overflow: auto;
+}
