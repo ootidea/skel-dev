@@ -40,6 +40,7 @@
 .skel-Select_option {
   display: flex;
   align-items: center;
+  gap: 0.3em;
 
   padding: 0 0.8em;
   box-sizing: border-box;
@@ -54,17 +55,12 @@
   &:active {
     background-color: oklch(94% 0 0);
   }
+}
 
-  &.skel-Select_selected {
-    color: var(--skel-primary-color);
-    background-color: var(--skel-primary-background-color);
+.skel-Select_selected-icon {
+  visibility: hidden;
 
-    &:hover {
-      background-color: var(--skel-primary-background-hover-color);
-    }
-
-    &:active {
-      background-color: var(--skel-primary-background-active-color);
-    }
+  .skel-Select_selected & {
+    visibility: visible;
   }
 }

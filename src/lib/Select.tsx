@@ -77,6 +77,7 @@ export function Select(rawProps: SelectProps) {
                     toggle()
                   }}
                 >
+                  <Icon class="skel-Select_selected-icon" src="/src/check.svg" size="1.2em" />
                   {getText(value)}
                 </div>
               </>
