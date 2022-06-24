@@ -1,10 +1,11 @@
-import { createSignal, mergeProps, onCleanup, onMount } from 'solid-js'
+import { createSignal, mergeProps, onCleanup, onMount, Signal } from 'solid-js'
 import './Dropdown.scss'
 import { Slot } from './Slot'
 import { assertNonUndefined, isInsideOf, observeWidth } from './utility/others'
 import { joinClass, joinStyle, prepareProps, SkelProps, SkelSlot, toGetters } from './utility/props'
 
 export type DropdownProps = SkelProps<{
+  openedSignal?: Signal<boolean>
   persistent?: boolean
   launcher?: SkelSlot<{ open: () => void; close: () => void; toggle: () => void; opened: boolean }>
   children?: SkelSlot<{ open: () => void; close: () => void; toggle: () => void; opened: boolean }>
@@ -12,10 +13,11 @@ export type DropdownProps = SkelProps<{
 
 export function Dropdown(rawProps: DropdownProps) {
   const [props, restProps] = prepareProps(rawProps, {
+    openedSignal: createSignal(false),
     persistent: false,
   })
 
-  const [opened, setOpened] = createSignal(false)
+  const [opened, setOpened] = props.openedSignal
 
   const open = () => setOpened(true)
   const close = () => setOpened(false)
