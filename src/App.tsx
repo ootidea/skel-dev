@@ -16,6 +16,7 @@ import { LayerLayoutComponent } from './page/LayerLayoutComponent'
 import { ModalComponent } from './page/ModalComponent'
 import { PopoverComponent } from './page/PopoverComponent'
 import { RadioButtonComponent } from './page/RadioButtonComponent'
+import { SelectComponent } from './page/SelectComponent'
 import { SpinnerComponent } from './page/SpinnerComponent'
 import { StretchLayoutComponent } from './page/StretchLayoutComponent'
 import { TextInputComponent } from './page/TextInputComponent'
@@ -28,6 +29,7 @@ export function App() {
     ['Checkbox', CheckboxComponent],
     ['RadioButton', RadioButtonComponent],
     ['TextInput', TextInputComponent],
+    ['Select', SelectComponent],
     ['Icon', IconComponent],
     ['Divider', DividerComponent],
     ['Spinner', SpinnerComponent],
