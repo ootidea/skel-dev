@@ -19,6 +19,16 @@ export function assertNonUndefined<T>(value: T | undefined, message?: string): a
 }
 
 /**
+ * Assert that a value is not null.
+ * Throws an exception if it is null.
+ */
+export function assertNonNull<T>(value: T | null, message?: string): asserts value is T {
+  if (value === null) {
+    throw new Error(message ?? 'Assertion error: the given value is null.')
+  }
+}
+
+/**
  * Clone given array, and remove all undefined.
  * @example
  * filterNonUndefined([123, undefined, 456, undefined])
