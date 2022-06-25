@@ -65,6 +65,20 @@ export function ButtonComponent() {
         </Button>
       </Sample>
 
+      <SectionTitle>Disabled</SectionTitle>
+      <Sample direction="horizontal">
+        <Button disabled>Button</Button>
+        <Button tint="achromatic" disabled>
+          accept
+        </Button>
+        <Button ghost disabled>
+          cancel
+        </Button>
+        <Button tint="achromatic" ghost disabled>
+          OK
+        </Button>
+      </Sample>
+
       <SectionTitle>onClick function that returns a Promise</SectionTitle>
       <Sample direction="horizontal">
         <Button onClick={awaitSomeSeconds}>Submit</Button>
