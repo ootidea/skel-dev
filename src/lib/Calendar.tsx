@@ -27,7 +27,7 @@ export function Calendar(rawProps: CalendarProps) {
     <div {...attrs}>
       <div class="skel-Calendar_year-month-area">
         <IconButton
-          src="src/assets/chevron-left.svg"
+          src="src/chevron-left.svg"
           onClick={() => setSelectedMonth(selectedMonth().subtract(1, 'month'))}
           size="1.6em"
         />
@@ -37,7 +37,7 @@ export function Calendar(rawProps: CalendarProps) {
           <span class="skel-Calendar_month">{selectedMonth().format('M')}月</span>
         </div>
         <IconButton
-          src="src/assets/chevron-right.svg"
+          src="src/chevron-right.svg"
           onClick={() => setSelectedMonth(selectedMonth().add(1, 'month'))}
           size="1.6em"
         />
