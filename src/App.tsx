@@ -5,6 +5,7 @@ import { Divider } from './lib/Divider'
 import { Spinner } from './lib/Spinner'
 import { StretchLayout } from './lib/StretchLayout'
 import { ButtonComponent } from './page/ButtonComponent'
+import { CalendarComponent } from './page/CalendarComponent'
 import { CheckboxComponent } from './page/CheckboxComponent'
 import { DividerComponent } from './page/DividerComponent'
 import { DropdownComponent } from './page/DropdownComponent'
@@ -40,6 +41,7 @@ export function App() {
     ['Dropdown', DropdownComponent],
     ['Popover', PopoverComponent],
     ['Foldable', FoldableComponent],
+    ['Calendar', CalendarComponent],
   ] as const
 
   return (
