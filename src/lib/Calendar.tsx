@@ -5,10 +5,12 @@ import { IconButton } from './IconButton'
 import { until } from './utility/others'
 import { joinClass, prepareProps, SkelProps, toGetters } from './utility/props'
 
-export type CalendarProps = SkelProps<{}>
+export type CalendarProps = SkelProps<{ defaultMonth?: Date }>
 
 export function Calendar(rawProps: CalendarProps) {
-  const [props, restProps] = prepareProps(rawProps, {})
+  const [props, restProps] = prepareProps(rawProps, {
+    defaultMonth: new Date(),
+  })
   const attrs = mergeProps(
     restProps,
     toGetters({
@@ -16,7 +18,7 @@ export function Calendar(rawProps: CalendarProps) {
     })
   )
 
-  const [selectedMonth, setSelectedMonth] = createSignal(dayjs())
+  const [selectedMonth, setSelectedMonth] = createSignal(dayjs(props.defaultMonth))
   const firstDateOfSelectedMonth = () => selectedMonth().date(1)
   const firstDateOfSelectedCalendar = () => firstDateOfSelectedMonth().subtract(firstDateOfSelectedMonth().day(), 'day')
 
