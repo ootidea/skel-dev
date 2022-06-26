@@ -61,17 +61,17 @@ export function Calendar(rawProps: CalendarProps) {
             <div class="skel-Calendar_date-row">
               <For each={dayNames}>
                 {(_, day) => {
-                  const date = firstDateOfSelectedCalendar().add(weakIndex, 'week').add(day(), 'day')
+                  const date = () => firstDateOfSelectedCalendar().add(weakIndex, 'week').add(day(), 'day')
                   return (
                     <div
                       class="skel-Calendar_cell"
                       classList={{
                         'skel-Calendar_other-month':
-                          date.isAfter(selectedMonth(), 'month') || date.isBefore(selectedMonth(), 'month'),
+                          date().isAfter(selectedMonth(), 'month') || date().isBefore(selectedMonth(), 'month'),
                       }}
                       data-day={day()}
                     >
-                      {date.date()}
+                      {date().date()}
                     </div>
                   )
                 }}
