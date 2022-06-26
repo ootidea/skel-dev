@@ -39,6 +39,15 @@ export function filterNonUndefined<T>(array: (T | undefined)[]): T[] {
   return array.filter((value) => value !== undefined) as T[]
 }
 
+/**
+ * Create sequence starting with 0.
+ * @example
+ * until(5) is equivalent to [0, 1, 2, 3, 4]
+ */
+export function until(length: number): readonly number[] {
+  return Array.from({ length }, (_, i) => i)
+}
+
 /** Like undefined functor */
 export function mapUndefined<T, U>(value: T | undefined, f: Arrow<[T], U>): U | undefined {
   return value === undefined ? undefined : f(value)
