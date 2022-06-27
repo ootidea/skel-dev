@@ -23,7 +23,8 @@
 
 .skel-Calendar_grid {
   display: grid;
-  grid-template-columns: repeat(7, auto);
+  grid-template-columns: repeat(7, var(--skel-Calendar_cell-size));
+  grid-auto-rows: var(--skel-Calendar_cell-size);
   width: max-content;
 }
 
@@ -37,10 +38,6 @@
   align-items: center;
   justify-content: center;
 
-  box-sizing: border-box;
-  width: var(--skel-Calendar_cell-size);
-  height: var(--skel-Calendar_cell-size);
-
   .skel-Calendar_day-row & {
     color: oklch(50% 0 0);
 
@@ -52,9 +49,8 @@
       color: var(--skel-Calendar_saturday-text-color);
     }
   }
-}
 
-.skel-Calendar_next-month,
-.skel-Calendar_prev-month {
-  color: oklch(60% 0 0);
+  &.skel-Calendar_other-month {
+    color: oklch(60% 0 0);
+  }
 }

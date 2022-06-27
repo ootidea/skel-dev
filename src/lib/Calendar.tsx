@@ -66,8 +66,8 @@ export function Calendar(rawProps: CalendarProps) {
                     <div
                       class="skel-Calendar_cell"
                       classList={{
-                        'skel-Calendar_next-month': date.isAfter(selectedMonth(), 'month'),
-                        'skel-Calendar_prev-month': date.isBefore(selectedMonth(), 'month'),
+                        'skel-Calendar_other-month':
+                          date.isAfter(selectedMonth(), 'month') || date.isBefore(selectedMonth(), 'month'),
                       }}
                       data-day={day()}
                     >
