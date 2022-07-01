@@ -16,6 +16,11 @@ export function CalendarComponent() {
       <Sample>
         <Calendar defaultMonth={new Date(1999, 0)} />
       </Sample>
+
+      <SectionTitle>Overwrite cell</SectionTitle>
+      <Sample>
+        <Calendar>{({ date }) => String(date.getDate()).padStart(2, '0')}</Calendar>
+      </Sample>
     </article>
   )
 }

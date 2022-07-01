@@ -1,11 +1,12 @@
 import dayjs from 'dayjs'
-import { createSignal, For, mergeProps } from 'solid-js'
+import { createSignal, For, mergeProps, Show } from 'solid-js'
 import './Calendar.scss'
 import { IconButton } from './IconButton'
+import { Slot } from './Slot'
 import { until } from './utility/others'
-import { joinClass, prepareProps, SkelProps, toGetters } from './utility/props'
+import { joinClass, prepareProps, SkelProps, SkelSlot, toGetters } from './utility/props'
 
-export type CalendarProps = SkelProps<{ defaultMonth?: Date }>
+export type CalendarProps = SkelProps<{ defaultMonth?: Date; children?: SkelSlot<{ date: Date }> }>
 
 export function Calendar(rawProps: CalendarProps) {
   const [props, restProps] = prepareProps(rawProps, {
@@ -71,7 +72,9 @@ export function Calendar(rawProps: CalendarProps) {
                       }}
                       data-day={day()}
                     >
-                      {date().date()}
+                      <Show when={rawProps.children !== undefined} fallback={date().date()}>
+                        <Slot content={rawProps.children} params={{ date: date().toDate() }} />
+                      </Show>
                     </div>
                   )
                 }}
