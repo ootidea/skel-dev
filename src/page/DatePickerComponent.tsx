@@ -1,35 +1,30 @@
 import { createSignal } from 'solid-js'
 import { Button } from '../lib/Button'
-import { Calendar } from '../lib/Calendar'
+import { DatePicker } from '../lib/DatePicker'
 import { PageTitle } from '../PageTitle'
 import { Sample } from '../Sample'
 import { SectionTitle } from '../SectionTitle'
 
-export function CalendarComponent() {
+export function DatePickerComponent() {
   const [date, setDate] = createSignal(new Date())
 
   return (
     <article>
-      <PageTitle>Calendar</PageTitle>
+      <PageTitle>DatePicker</PageTitle>
 
       <Sample>
-        <Calendar />
+        <DatePicker />
       </Sample>
 
       <SectionTitle>Specify default month</SectionTitle>
       <Sample>
-        <Calendar defaultMonth={new Date(1999, 0)} />
+        <DatePicker defaultMonth={new Date(1999, 0)} />
       </Sample>
 
       <SectionTitle>Month signal</SectionTitle>
       <Sample>
-        <Calendar monthSignal={[date, setDate]} />
+        <DatePicker monthSignal={[date, setDate]} />
         <Button onClick={() => setDate(new Date(2 * date().getTime()))}>Change month</Button>
-      </Sample>
-
-      <SectionTitle>Overwrite cell</SectionTitle>
-      <Sample>
-        <Calendar>{({ date }) => String(date.getDate()).padStart(2, '0')}</Calendar>
       </Sample>
     </article>
   )

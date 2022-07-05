@@ -7,6 +7,7 @@ import { StretchLayout } from './lib/StretchLayout'
 import { ButtonComponent } from './page/ButtonComponent'
 import { CalendarComponent } from './page/CalendarComponent'
 import { CheckboxComponent } from './page/CheckboxComponent'
+import { DatePickerComponent } from './page/DatePickerComponent'
 import { DividerComponent } from './page/DividerComponent'
 import { DropdownComponent } from './page/DropdownComponent'
 import { FoldableComponent } from './page/FoldableComponent'
@@ -42,6 +43,7 @@ export function App() {
     ['Popover', PopoverComponent],
     ['Foldable', FoldableComponent],
     ['Calendar', CalendarComponent],
+    ['DatePicker', DatePickerComponent],
   ] as const
 
   return (
