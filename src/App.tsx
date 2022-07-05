@@ -4,6 +4,7 @@ import classes from './App.module.scss'
 import { Divider } from './lib/Divider'
 import { Spinner } from './lib/Spinner'
 import { StretchLayout } from './lib/StretchLayout'
+import { AutoSizeTextAreaComponent } from './page/AutoSizeTextAreaComponent'
 import { ButtonComponent } from './page/ButtonComponent'
 import { CalendarComponent } from './page/CalendarComponent'
 import { CheckboxComponent } from './page/CheckboxComponent'
@@ -31,6 +32,7 @@ export function App() {
     ['Checkbox', CheckboxComponent],
     ['RadioButton', RadioButtonComponent],
     ['TextInput', TextInputComponent],
+    ['AutoSizeTextArea', AutoSizeTextAreaComponent],
     ['Select', SelectComponent],
     ['Icon', IconComponent],
     ['Divider', DividerComponent],

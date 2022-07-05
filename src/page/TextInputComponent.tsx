@@ -14,18 +14,6 @@ export function TextInputComponent() {
         <TextInput />
       </Sample>
 
-      <SectionTitle>Size</SectionTitle>
-      <Sample>
-        <TextInput value="value" />
-        <TextInput placeholder="placeholder" />
-      </Sample>
-
-      <SectionTitle>Size</SectionTitle>
-      <Sample>
-        <TextInput value="value" />
-        <TextInput placeholder="placeholder" />
-      </Sample>
-
       <SectionTitle>Placeholder and initial value</SectionTitle>
       <Sample>
         <TextInput placeholder="placeholder" />
