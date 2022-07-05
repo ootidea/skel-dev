@@ -1,17 +1,25 @@
-import dayjs from 'dayjs'
-import { createSignal, For, mergeProps, Show } from 'solid-js'
+import dayjs, { Dayjs } from 'dayjs'
+import { createSignal, For, mergeProps, Show, Signal } from 'solid-js'
 import './Calendar.scss'
 import { IconButton } from './IconButton'
 import { Slot } from './Slot'
 import { until } from './utility/others'
 import { joinClass, prepareProps, SkelProps, SkelSlot, toGetters } from './utility/props'
 
-export type CalendarProps = SkelProps<{ defaultMonth?: Date; children?: SkelSlot<{ date: Date }> }>
+export type CalendarProps = SkelProps<{
+  defaultMonth?: Date
+  monthSignal?: Signal<Date>
+  children?: SkelSlot<{ date: Date }>
+}>
 
 export function Calendar(rawProps: CalendarProps) {
-  const [props, restProps] = prepareProps(rawProps, {
-    defaultMonth: new Date(),
-  })
+  const [props, restProps] = prepareProps(
+    rawProps,
+    {
+      defaultMonth: new Date(),
+    },
+    ['monthSignal']
+  )
   const attrs = mergeProps(
     restProps,
     toGetters({
@@ -19,8 +27,13 @@ export function Calendar(rawProps: CalendarProps) {
     })
   )
 
-  const [selectedMonth, setSelectedMonth] = createSignal(dayjs(props.defaultMonth))
-  const firstDateOfSelectedMonth = () => selectedMonth().date(1)
+  const [selectedMonth, setSelectedMonth] = props.monthSignal ?? createSignal(props.defaultMonth)
+
+  // Dayjs-Date adapters
+  const selectedMonth_ = () => dayjs(selectedMonth())
+  const setSelectedMonth_ = (date: Dayjs) => setSelectedMonth(date.toDate())
+
+  const firstDateOfSelectedMonth = () => selectedMonth_().date(1)
   const firstDateOfSelectedCalendar = () => firstDateOfSelectedMonth().subtract(firstDateOfSelectedMonth().day(), 'day')
 
   // TODO: i18n
@@ -31,17 +44,17 @@ export function Calendar(rawProps: CalendarProps) {
       <div class="skel-Calendar_year-month-area">
         <IconButton
           src="src/chevron-left.svg"
-          onClick={() => setSelectedMonth(selectedMonth().subtract(1, 'month'))}
+          onClick={() => setSelectedMonth_(selectedMonth_().subtract(1, 'month'))}
           size="1.6em"
         />
         <div class="skel-Calendar_year-month">
           {/* TODO: i18n */}
-          <span class="skel-Calendar_year">{selectedMonth().format('YYYY')}年</span>
-          <span class="skel-Calendar_month">{selectedMonth().format('M')}月</span>
+          <span class="skel-Calendar_year">{selectedMonth_().format('YYYY')}年</span>
+          <span class="skel-Calendar_month">{selectedMonth_().format('M')}月</span>
         </div>
         <IconButton
           src="src/chevron-right.svg"
-          onClick={() => setSelectedMonth(selectedMonth().add(1, 'month'))}
+          onClick={() => setSelectedMonth_(selectedMonth_().add(1, 'month'))}
           size="1.6em"
         />
       </div>
