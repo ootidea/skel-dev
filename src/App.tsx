@@ -21,6 +21,7 @@ import { PopoverComponent } from './page/PopoverComponent'
 import { RadioButtonComponent } from './page/RadioButtonComponent'
 import { SelectComponent } from './page/SelectComponent'
 import { SpinnerComponent } from './page/SpinnerComponent'
+import { StepperComponent } from './page/StepperComponent'
 import { StretchLayoutComponent } from './page/StretchLayoutComponent'
 import { TextInputComponent } from './page/TextInputComponent'
 import { SidebarMenu } from './SidebarMenu'
@@ -46,6 +47,7 @@ export function App() {
     ['Foldable', FoldableComponent],
     ['Calendar', CalendarComponent],
     ['DatePicker', DatePickerComponent],
+    ['Stepper', StepperComponent],
   ] as const
 
   return (
