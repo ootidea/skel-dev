@@ -63,4 +63,8 @@
   .skel-Select_selected & {
     visibility: visible;
   }
+
+  .skel-Select_no-selected-option & {
+    display: none;
+  }
 }

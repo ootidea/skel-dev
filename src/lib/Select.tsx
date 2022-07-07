@@ -62,7 +62,7 @@ export function Select(rawProps: SelectProps) {
       )}
     >
       {({ toggle }) => (
-        <div class="skel-Select_dropdown">
+        <div class="skel-Select_dropdown" classList={{ 'skel-Select_no-selected-option': selected() === undefined }}>
           <For each={props.values}>
             {(value, i) => (
               <>
