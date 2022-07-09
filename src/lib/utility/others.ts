@@ -9,6 +9,19 @@ import { JSX, onCleanup } from 'solid-js'
 export type Arrow<Tuple extends unknown[], Return> = (...args: Tuple) => Return
 
 /**
+ * call(() => {
+ *   ...
+ * })
+ * is readable than
+ * (() => {
+ *   ...
+ * })()
+ */
+export function call<T>(f: () => T): T {
+  return f()
+}
+
+/**
  * Assert that a value is not undefined.
  * Throws an exception if it is undefined.
  */
