@@ -20,6 +20,7 @@ import { ModalComponent } from './page/ModalComponent'
 import { PopoverComponent } from './page/PopoverComponent'
 import { RadioButtonComponent } from './page/RadioButtonComponent'
 import { SelectComponent } from './page/SelectComponent'
+import { SingleSelectToggleButtonsComponent } from './page/SingleSelectToggleButtonsComponent'
 import { SpinnerComponent } from './page/SpinnerComponent'
 import { StepperComponent } from './page/StepperComponent'
 import { StretchLayoutComponent } from './page/StretchLayoutComponent'
@@ -30,6 +31,7 @@ export function App() {
   const pages = [
     ['Button', ButtonComponent],
     ['IconButton', IconButtonComponent],
+    ['SingleSelectToggleButtons', SingleSelectToggleButtonsComponent],
     ['Checkbox', CheckboxComponent],
     ['RadioButton', RadioButtonComponent],
     ['TextInput', TextInputComponent],
