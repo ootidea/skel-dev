@@ -1,4 +1,5 @@
 import { createSignal } from 'solid-js'
+import { Icon } from '../lib/Icon'
 import { SingleSelectToggleButtons } from '../lib/SingleSelectToggleButtons'
 import { PageTitle } from '../PageTitle'
 import { Sample } from '../Sample'
@@ -19,6 +20,13 @@ export function SingleSelectToggleButtonsComponent() {
       <Sample>
         <SingleSelectToggleButtons values={['en', 'zh']} titles={{ en: 'English', zh: 'Chinese' }} />
         <SingleSelectToggleButtons values={['en', 'zh', 'jp']} titles={{ en: 'English', zh: 'Chinese' }} />
+      </Sample>
+
+      <SectionTitle>Icons</SectionTitle>
+      <Sample>
+        <SingleSelectToggleButtons values={['left', 'right']}>
+          {({ value }) => <Icon src={`src/format-align-${value}.svg`} />}
+        </SingleSelectToggleButtons>
       </Sample>
 
       <SectionTitle>Signal</SectionTitle>

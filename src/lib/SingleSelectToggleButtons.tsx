@@ -1,7 +1,8 @@
 import { createSignal, For, mergeProps, Signal } from 'solid-js'
 import './SingleSelectToggleButtons.scss'
+import { Slot } from './Slot'
 import { ToggleButton } from './ToggleButton'
-import { joinClass, joinClassList, prepareProps, SkelProps, toGetters } from './utility/props'
+import { joinClass, joinClassList, prepareProps, SkelProps, SkelSlot, toGetters } from './utility/props'
 
 export type SingleSelectToggleButtonsProps<T extends readonly string[] | readonly number[]> = SkelProps<{
   values: T
@@ -10,6 +11,7 @@ export type SingleSelectToggleButtonsProps<T extends readonly string[] | readonl
   defaultSelected?: T[number]
   fullWidth?: boolean
   disableUnselect?: boolean
+  children?: SkelSlot<{ value: T[number] }>
   onSelect?: (selected: T[number] | undefined) => unknown
 }>
 
@@ -22,7 +24,7 @@ export function SingleSelectToggleButtons<T extends readonly string[] | readonly
       fullWidth: false,
       disableUnselect: false,
     },
-    ['values', 'titles', 'selectedSignal', 'defaultSelected', 'onSelect']
+    ['values', 'titles', 'selectedSignal', 'defaultSelected', 'onSelect', 'children']
   )
   const attrs = mergeProps(
     restProps,
@@ -51,7 +53,9 @@ export function SingleSelectToggleButtons<T extends readonly string[] | readonly
       <For each={props.values}>
         {(value: T[number]) => (
           <ToggleButton selected={selected() === value} onClick={() => clickEventHandler(value)}>
-            {props.titles?.[value] ?? value}
+            <Slot content={props.children} params={{ value }}>
+              {props.titles?.[String(value)] ?? value}
+            </Slot>
           </ToggleButton>
         )}
       </For>
