@@ -2,7 +2,6 @@ import { Route, Router, Routes } from 'solid-app-router'
 import { For } from 'solid-js'
 import classes from './App.module.scss'
 import { Divider } from './lib/Divider'
-import { Spinner } from './lib/Spinner'
 import { StretchLayout } from './lib/StretchLayout'
 import { AutoSizeTextAreaComponent } from './page/AutoSizeTextAreaComponent'
 import { ButtonComponent } from './page/ButtonComponent'
@@ -28,44 +27,48 @@ import { TextInputComponent } from './page/TextInputComponent'
 import { ToggleButtonGroupComponent } from './page/ToggleButtonGroupComponent'
 import { SidebarMenu } from './SidebarMenu'
 
+function getName(component: Function) {
+  return component.name.replace(/Component$/, '')
+}
+
 export function App() {
   const pages = [
-    ['Button', ButtonComponent],
-    ['IconButton', IconButtonComponent],
-    ['ToggleButtonGroup', ToggleButtonGroupComponent],
-    ['Checkbox', CheckboxComponent],
-    ['RadioButton', RadioButtonComponent],
-    ['TextInput', TextInputComponent],
-    ['AutoSizeTextArea', AutoSizeTextAreaComponent],
-    ['Select', SelectComponent],
-    ['Icon', IconComponent],
-    ['Divider', DividerComponent],
-    ['Spinner', SpinnerComponent],
-    ['StretchLayout', StretchLayoutComponent],
-    ['LayerLayout', LayerLayoutComponent],
-    ['Gravity', GravityComponent],
-    ['Modal', ModalComponent],
-    ['Dropdown', DropdownComponent],
-    ['Popover', PopoverComponent],
-    ['Foldable', FoldableComponent],
-    ['Resizable', ResizableComponent],
-    ['Calendar', CalendarComponent],
-    ['DatePicker', DatePickerComponent],
-    ['Stepper', StepperComponent],
+    ButtonComponent,
+    IconButtonComponent,
+    ToggleButtonGroupComponent,
+    CheckboxComponent,
+    RadioButtonComponent,
+    TextInputComponent,
+    AutoSizeTextAreaComponent,
+    SelectComponent,
+    IconComponent,
+    DividerComponent,
+    SpinnerComponent,
+    StretchLayoutComponent,
+    LayerLayoutComponent,
+    GravityComponent,
+    ModalComponent,
+    DropdownComponent,
+    PopoverComponent,
+    FoldableComponent,
+    ResizableComponent,
+    CalendarComponent,
+    DatePickerComponent,
+    StepperComponent,
   ] as const
 
   return (
     <Router>
       <StretchLayout style={{ height: '100%' }} stretchAt={2}>
         <nav class={classes.sidebar}>
-          <For each={pages}>{([name]) => <SidebarMenu componentName={name} />}</For>
+          <For each={pages}>{(component) => <SidebarMenu componentName={getName(component)} />}</For>
         </nav>
         <Divider direction="vertical" />
         <main class={classes.main}>
           <Routes>
             {/* For some reason, it was not displayed using the For component. */}
-            {pages.map(([name, component]) => (
-              <Route path={name} element={component} />
+            {pages.map((component) => (
+              <Route path={getName(component)} element={component} />
             ))}
           </Routes>
         </main>
