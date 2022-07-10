@@ -4,20 +4,18 @@ import { Slot } from './Slot'
 import { ToggleButton } from './ToggleButton'
 import { joinClass, joinClassList, prepareProps, SkelProps, SkelSlot, toGetters } from './utility/props'
 
-export type SingleSelectToggleButtonsProps<T extends readonly string[] | readonly number[]> = SkelProps<{
-  values: T
+export type SingleSelectToggleButtonsProps<T extends string | number> = SkelProps<{
+  values: readonly T[]
   titles?: Partial<Record<string, string>>
-  selectedSignal?: Signal<T[number] | undefined>
-  defaultSelected?: T[number]
+  selectedSignal?: Signal<T | undefined>
+  defaultSelected?: T
   fullWidth?: boolean
   disableUnselect?: boolean
-  children?: SkelSlot<{ value: T[number] }>
-  onSelect?: (selected: T[number] | undefined) => unknown
+  children?: SkelSlot<{ value: T }>
+  onSelect?: (selected: T | undefined) => unknown
 }>
 
-export function SingleSelectToggleButtons<T extends readonly string[] | readonly number[]>(
-  rawProps: SingleSelectToggleButtonsProps<T>
-) {
+export function SingleSelectToggleButtons<T extends string | number>(rawProps: SingleSelectToggleButtonsProps<T>) {
   const [props, restProps] = prepareProps(
     rawProps,
     {
@@ -35,11 +33,11 @@ export function SingleSelectToggleButtons<T extends readonly string[] | readonly
     })
   )
 
-  const [selected, setSelected] = props.selectedSignal ?? createSignal<T[number] | undefined>(props.defaultSelected)
+  const [selected, setSelected] = props.selectedSignal ?? createSignal<T | undefined>(props.defaultSelected)
 
-  function clickEventHandler(value: T[number]) {
+  function clickEventHandler(value: T) {
     if (value !== selected()) {
-      setSelected(value as Exclude<T[number], Function>)
+      setSelected(value as Exclude<T, Function>)
       props.onSelect?.(selected())
     } else if (!props.disableUnselect) {
       setSelected(undefined)
@@ -50,7 +48,7 @@ export function SingleSelectToggleButtons<T extends readonly string[] | readonly
   return (
     <div {...attrs}>
       <For each={props.values}>
-        {(value: T[number]) => (
+        {(value: T) => (
           <ToggleButton selected={selected() === value} onClick={() => clickEventHandler(value)}>
             <Slot content={props.children} params={{ value }}>
               {props.titles?.[String(value)] ?? value}
