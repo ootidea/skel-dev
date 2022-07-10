@@ -3,10 +3,10 @@ import './Resizable.scss'
 import { assertNonUndefined } from './utility/others'
 import { joinClass, joinStyle, prepareProps, SkelProps, toGetters } from './utility/props'
 
-export type ResizableProps = SkelProps<{}>
+export type ResizableProps = SkelProps<{ onChangeWidth?: (width: number) => unknown }>
 
 export function Resizable(rawProps: ResizableProps) {
-  const [props, restProps] = prepareProps(rawProps, {})
+  const [props, restProps] = prepareProps(rawProps, {}, ['onChangeWidth'])
 
   const [width, setWidth] = createSignal<number | undefined>(undefined)
 
@@ -41,7 +41,9 @@ export function Resizable(rawProps: ResizableProps) {
     assertNonUndefined(rootElement)
     const right = event.clientX
     const left = rootElement.getBoundingClientRect().left
-    setWidth(right - left - dragState.deltaX)
+    const width = right - left - dragState.deltaX
+    props.onChangeWidth?.(width)
+    setWidth(width)
   }
 
   return (
