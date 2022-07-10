@@ -1,4 +1,4 @@
-import { createSignal, For, mergeProps, Signal } from 'solid-js'
+import { createEffect, createSignal, For, mergeProps } from 'solid-js'
 import { Slot } from './Slot'
 import './ToggleButtonGroup.scss'
 import { call } from './utility/others'
@@ -8,12 +8,11 @@ export type ToggleButtonGroupProps<T extends string | number> = SkelProps<
   (
     | {
         exclusive: true
-        selectedSignal?: Signal<T | undefined>
-        onChange?: (state: T | undefined) => unknown
-        defaultSelected?: T
+        selected?: T | undefined
+        onChangeSelected?: (state: T | undefined) => unknown
         disableUnselect?: boolean
       }
-    | { exclusive?: false; selectedSignal?: Signal<Set<T>>; onChange?: (state: Set<T>) => unknown }
+    | { exclusive?: false; selected?: Set<T>; onChangeSelected?: (state: Set<T>) => unknown }
   ) & {
     values: readonly T[]
     titles?: Partial<Record<string, string>>
@@ -32,7 +31,7 @@ export function ToggleButtonGroup<T extends string | number>(rawProps: ToggleBut
       disableUnselect: false,
       exclusive: false,
     },
-    ['values', 'titles', 'selectedSignal', 'onSelect', 'children']
+    ['values', 'titles', 'selected', 'onSelect', 'children']
   )
   const attrs = mergeProps(
     restProps,
@@ -48,11 +47,19 @@ export function ToggleButtonGroup<T extends string | number>(rawProps: ToggleBut
 
   const union = call(() => {
     if (rawProps.exclusive) {
-      const [selected, setSelected] = rawProps.selectedSignal ?? createSignal<T | undefined>(rawProps.defaultSelected)
-      return { exclusive: true, selected, setSelected, disableUnselect: rawProps.disableUnselect } as const
+      const [selected, setSelected] = createSignal(rawProps.selected)
+      createEffect(() => setSelected(rawProps.selected as Exclude<T, Function>))
+      return {
+        exclusive: true,
+        selected,
+        setSelected,
+        onChangeSelected: rawProps.onChangeSelected,
+        disableUnselect: rawProps.disableUnselect,
+      } as const
     } else {
-      const [selected, setSelected] = rawProps.selectedSignal ?? createSignal<Set<T>>(new Set(), { equals: false })
-      return { exclusive: false, selected, setSelected } as const
+      const [selected, setSelected] = createSignal(rawProps.selected ?? new Set<T>(), { equals: false })
+      createEffect(() => setSelected(rawProps.selected ?? new Set<T>()))
+      return { exclusive: false, selected, setSelected, onChangeSelected: rawProps.onChangeSelected } as const
     }
   })
 
@@ -68,19 +75,23 @@ export function ToggleButtonGroup<T extends string | number>(rawProps: ToggleBut
     if (union.exclusive) {
       if (union.selected() !== value) {
         union.setSelected(value as Exclude<T, Function>)
+        union.onChangeSelected?.(value)
         props.onSelect?.(value)
       } else if (!union.disableUnselect) {
         union.setSelected(undefined)
+        union.onChangeSelected?.(undefined)
         props.onUnselect?.(value)
       }
     } else {
       if (union.selected().has(value)) {
         union.selected().delete(value)
         union.setSelected(union.selected())
+        union.onChangeSelected?.(union.selected())
         props.onUnselect?.(value)
       } else {
         union.selected().add(value)
         union.setSelected(union.selected())
+        union.onChangeSelected?.(union.selected())
         props.onSelect?.(value)
       }
     }

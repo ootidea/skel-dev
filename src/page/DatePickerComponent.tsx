@@ -18,12 +18,17 @@ export function DatePickerComponent() {
 
       <SectionTitle>Specify default month</SectionTitle>
       <Sample>
-        <DatePicker defaultMonth={new Date(1999, 0)} />
+        <DatePicker month={new Date(1999, 0)} />
       </Sample>
 
-      <SectionTitle>Month signal</SectionTitle>
+      <SectionTitle>Specify default selected date</SectionTitle>
       <Sample>
-        <DatePicker monthSignal={[date, setDate]} />
+        <DatePicker selectedDate={new Date()} />
+      </Sample>
+
+      <SectionTitle>Bind to signal</SectionTitle>
+      <Sample>
+        <DatePicker month={date()} onChangeMonth={setDate} />
         <Button onClick={() => setDate(new Date(2 * date().getTime()))}>Change month</Button>
       </Sample>
     </article>

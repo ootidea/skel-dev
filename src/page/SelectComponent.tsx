@@ -25,9 +25,9 @@ export function SelectComponent() {
         <Select values={['Female', 'Male', 'Other']} placeholder="placeholder" disabled />
       </Sample>
 
-      <SectionTitle>Signal</SectionTitle>
+      <SectionTitle>Bind to signal</SectionTitle>
       <Sample>
-        <Select values={['Female', 'Male', 'Other']} selectedSignal={[selected, setSelected]} />
+        <Select values={['Female', 'Male', 'Other']} selected={selected()} onChangeSelected={setSelected} />
         <div>selected() === {selected() !== undefined ? `'${selected()}'` : 'undefined'}</div>
       </Sample>
     </article>

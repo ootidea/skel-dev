@@ -1,25 +1,31 @@
-import { createSignal, mergeProps, Signal } from 'solid-js'
+import { createEffect, createSignal, mergeProps } from 'solid-js'
 import './AutoSizeTextArea.scss'
 import { joinClass, prepareProps, SkelProps, toGetters } from './utility/props'
 
 export type AutoSizeTextAreaProps = SkelProps<
-  { defaultValue?: string; valueSignal?: Signal<string>; value?: never },
+  { value?: string; onChangeValue?: (value: string) => unknown },
   'textarea'
 >
 
 export function AutoSizeTextArea(rawProps: AutoSizeTextAreaProps) {
-  const [props, restProps] = prepareProps(rawProps, { defaultValue: '' })
+  const [props, restProps] = prepareProps(rawProps, {}, ['value', 'onChangeValue'])
   const attrs = mergeProps(
     restProps,
     toGetters({
       class: () => joinClass(rawProps.class, 'skel-AutoSizeTextArea_text-area'),
     })
   )
-  const [value, setValue] = rawProps.valueSignal ?? createSignal(props.defaultValue)
+  const [value, setValue] = createSignal(rawProps.value)
+  createEffect(() => setValue(rawProps.value))
+
+  function onChangeValue(value: string) {
+    setValue(value)
+    props.onChangeValue?.(value)
+  }
 
   function onInput(event: InputEvent) {
     if (event.target instanceof HTMLTextAreaElement) {
-      setValue(event.target.value)
+      onChangeValue(event.target.value)
     }
   }
 

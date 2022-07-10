@@ -1,5 +1,5 @@
 import dayjs, { Dayjs } from 'dayjs'
-import { createSignal, For, mergeProps, Show, Signal } from 'solid-js'
+import { createEffect, createSignal, For, mergeProps, Show } from 'solid-js'
 import './Calendar.scss'
 import { IconButton } from './IconButton'
 import { Slot } from './Slot'
@@ -7,8 +7,8 @@ import { until } from './utility/others'
 import { joinClass, prepareProps, SkelProps, SkelSlot, toGetters } from './utility/props'
 
 export type CalendarProps = SkelProps<{
-  defaultMonth?: Date
-  monthSignal?: Signal<Date>
+  month?: Date
+  onChangeMonth?: (month: Date) => unknown
   children?: SkelSlot<{ date: Date }>
 }>
 
@@ -16,9 +16,9 @@ export function Calendar(rawProps: CalendarProps) {
   const [props, restProps] = prepareProps(
     rawProps,
     {
-      defaultMonth: new Date(),
+      month: new Date(),
     },
-    ['monthSignal']
+    ['onChangeMonth']
   )
   const attrs = mergeProps(
     restProps,
@@ -27,11 +27,17 @@ export function Calendar(rawProps: CalendarProps) {
     })
   )
 
-  const [selectedMonth, setSelectedMonth] = props.monthSignal ?? createSignal(props.defaultMonth)
+  const [selectedMonth, setSelectedMonth] = createSignal(props.month, { equals: false })
+  createEffect(() => setSelectedMonth(props.month))
+
+  function changeMonth(month: Date) {
+    setSelectedMonth(month)
+    props.onChangeMonth?.(month)
+  }
 
   // Dayjs-Date adapters
   const selectedMonth_ = () => dayjs(selectedMonth())
-  const setSelectedMonth_ = (date: Dayjs) => setSelectedMonth(date.toDate())
+  const setSelectedMonth_ = (date: Dayjs) => changeMonth(date.toDate())
 
   const firstDateOfSelectedMonth = () => selectedMonth_().date(1)
   const firstDateOfSelectedCalendar = () => firstDateOfSelectedMonth().subtract(firstDateOfSelectedMonth().day(), 'day')

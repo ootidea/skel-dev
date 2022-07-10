@@ -18,19 +18,19 @@ export function AutoSizeTextAreaComponent() {
       <SectionTitle>Placeholder and default value</SectionTitle>
       <Sample>
         <AutoSizeTextArea placeholder="placeholder" />
-        <AutoSizeTextArea defaultValue="default value" />
+        <AutoSizeTextArea value="default value" />
       </Sample>
 
-      <SectionTitle>Signal</SectionTitle>
+      <SectionTitle>Bind to signal</SectionTitle>
       <Sample>
-        <AutoSizeTextArea valueSignal={[value, setValue]} />
+        <AutoSizeTextArea value={value()} onChangeValue={setValue} />
         <div style={{ 'white-space': 'pre-wrap' }}>{value()}</div>
       </Sample>
 
       <SectionTitle>Disabled</SectionTitle>
       <Sample>
         <AutoSizeTextArea placeholder="placeholder" disabled />
-        <AutoSizeTextArea defaultValue="default value" disabled />
+        <AutoSizeTextArea value="default value" disabled />
       </Sample>
     </article>
   )

@@ -6,7 +6,7 @@ import { Sample } from '../Sample'
 import { SectionTitle } from '../SectionTitle'
 
 export function CalendarComponent() {
-  const [date, setDate] = createSignal(new Date())
+  const [date, setDate] = createSignal(new Date(), { equals: false })
 
   return (
     <article>
@@ -18,12 +18,12 @@ export function CalendarComponent() {
 
       <SectionTitle>Specify default month</SectionTitle>
       <Sample>
-        <Calendar defaultMonth={new Date(1999, 0)} />
+        <Calendar month={new Date(1999, 0)} />
       </Sample>
 
-      <SectionTitle>Month signal</SectionTitle>
+      <SectionTitle>Bind to signal</SectionTitle>
       <Sample>
-        <Calendar monthSignal={[date, setDate]} />
+        <Calendar month={date()} onChangeMonth={setDate} />
         <Button onClick={() => setDate(new Date(2 * date().getTime()))}>Change month</Button>
       </Sample>
 

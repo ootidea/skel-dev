@@ -26,11 +26,11 @@ export function ModalComponent() {
         </Modal>
       </Sample>
 
-      <SectionTitle>Controlled component</SectionTitle>
+      <SectionTitle>Bind to signal</SectionTitle>
       <Sample>
         <Button onClick={() => setOpened(true)}>Open</Button>
         opened() === {String(opened())}
-        <Modal openedSignal={[opened, setOpened]}>
+        <Modal opened={opened()} onChangeOpened={setOpened}>
           <Button onClick={() => setOpened(false)}>Close</Button>
         </Modal>
       </Sample>

@@ -6,8 +6,8 @@ import { Sample } from '../Sample'
 import { SectionTitle } from '../SectionTitle'
 
 export function ToggleButtonGroupComponent() {
-  const [selected, setSelected] = createSignal<'en' | 'zh' | undefined>('en')
-  const selectedSignal = createSignal<Set<'en' | 'zh'>>(new Set(), { equals: false })
+  const [selected1, setSelected1] = createSignal<'en' | 'zh' | undefined>('en')
+  const [selected2, setSelected2] = createSignal<Set<'en' | 'zh'>>(new Set(), { equals: false })
 
   return (
     <article>
@@ -37,17 +37,17 @@ export function ToggleButtonGroupComponent() {
         </ToggleButtonGroup>
       </Sample>
 
-      <SectionTitle>Signal</SectionTitle>
+      <SectionTitle>Bind to signal</SectionTitle>
       <Sample>
-        <ToggleButtonGroup exclusive values={['en', 'zh']} selectedSignal={[selected, setSelected]} />
-        <div>selected() === {selected() !== undefined ? `'${selected()}'` : 'undefined'}</div>
-        <ToggleButtonGroup values={['en', 'zh']} selectedSignal={selectedSignal} />
-        <div>selected(): {JSON.stringify([...selectedSignal[0]()])}</div>
+        <ToggleButtonGroup exclusive values={['en', 'zh']} selected={selected1()} onChangeSelected={setSelected1} />
+        <div>selected1() === {selected1() !== undefined ? `'${selected1()}'` : 'undefined'}</div>
+        <ToggleButtonGroup values={['en', 'zh']} selected={selected2()} onChangeSelected={setSelected2} />
+        <div>selected2() is new Set({JSON.stringify([...selected2()])})</div>
       </Sample>
 
       <SectionTitle>Default selected</SectionTitle>
       <Sample>
-        <ToggleButtonGroup exclusive values={['Male', 'Female']} defaultSelected="Male" />
+        <ToggleButtonGroup exclusive values={['Male', 'Female']} selected="Male" />
       </Sample>
 
       <SectionTitle>onSelect</SectionTitle>

@@ -1,4 +1,4 @@
-import { createSignal, For, mergeProps, Show, Signal } from 'solid-js'
+import { createEffect, createSignal, For, mergeProps, Show } from 'solid-js'
 import { Divider } from './Divider'
 import { Dropdown } from './Dropdown'
 import { Icon } from './Icon'
@@ -9,9 +9,10 @@ import { joinClass, joinClassList, prepareProps, SkelProps, toGetters } from './
 export type SelectProps<T extends string> = SkelProps<{
   values: readonly T[]
   titles?: Partial<Record<string, string>>
-  selectedSignal?: Signal<T | undefined>
+  selected?: T | undefined
   placeholder?: string
   disabled?: boolean
+  onChangeSelected?: (selected: T | undefined) => unknown
 }>
 
 export function Select<T extends string>(rawProps: SelectProps<T>) {
@@ -22,7 +23,7 @@ export function Select<T extends string>(rawProps: SelectProps<T>) {
       placeholder: '',
       disabled: false,
     },
-    ['values', 'selectedSignal']
+    ['values', 'selected', 'onChangeSelected']
   )
 
   function getText(value: string): string {
@@ -30,7 +31,8 @@ export function Select<T extends string>(rawProps: SelectProps<T>) {
   }
 
   const [opened, setOpened] = createSignal(false)
-  const [selected, setSelected] = props.selectedSignal ?? createSignal<T | undefined>(undefined)
+  const [selected, setSelected] = createSignal(props.selected)
+  createEffect(() => setSelected(props.selected as Exclude<T, Function>))
 
   const attrs = mergeProps(
     restProps,
@@ -41,9 +43,15 @@ export function Select<T extends string>(rawProps: SelectProps<T>) {
     })
   )
 
+  function changeSelected(selected: T | undefined) {
+    setSelected(selected as Exclude<T, Function>)
+    props.onChangeSelected?.(selected)
+  }
+
   return (
     <Dropdown
-      openedSignal={[opened, setOpened]}
+      opened={opened()}
+      onChangeOpened={setOpened}
       launcher={({ toggle }) => (
         <StretchLayout onClick={() => props.disabled || toggle()} {...attrs}>
           <div class="skel-Select_preview-area">
@@ -74,7 +82,7 @@ export function Select<T extends string>(rawProps: SelectProps<T>) {
                   class="skel-Select_option"
                   classList={{ 'skel-Select_selected': selected() === value }}
                   onClick={() => {
-                    setSelected(value as Exclude<T, Function>)
+                    changeSelected(value)
                     toggle()
                   }}
                 >

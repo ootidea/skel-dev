@@ -1,12 +1,13 @@
-import { createSignal, mergeProps, Show, Signal } from 'solid-js'
+import { createEffect, createSignal, mergeProps, Show } from 'solid-js'
 import './common.scss'
 import './Modal.scss'
 import { Slot } from './Slot'
 import { joinClass, prepareProps, SkelProps, SkelSlot, toGetters } from './utility/props'
 
 export type ModalProps = SkelProps<{
-  openedSignal?: Signal<boolean>
+  opened?: boolean
   persistent?: boolean
+  onChangeOpened?: (opened: boolean) => unknown
   launcher?: SkelSlot<{ open: () => void; close: () => void; toggle: () => void }>
   children?: SkelSlot<{ open: () => void; close: () => void; toggle: () => void }>
 }>
@@ -16,9 +17,9 @@ export function Modal(rawProps: ModalProps) {
     rawProps,
     {
       persistent: false,
-      openedSignal: createSignal(false),
+      opened: false,
     },
-    ['launcher']
+    ['launcher', 'onChangeOpened']
   )
   const attrs = mergeProps(
     restProps,
@@ -27,11 +28,17 @@ export function Modal(rawProps: ModalProps) {
     })
   )
 
-  const [opened, setOpened] = props.openedSignal
+  const [opened, setOpened] = createSignal(props.opened)
+  createEffect(() => setOpened(props.opened))
 
-  const open = () => setOpened(true)
-  const close = () => setOpened(false)
-  const toggle = () => setOpened(!opened())
+  function changeOpened(opened: boolean) {
+    setOpened(opened)
+    props.onChangeOpened?.(opened)
+  }
+
+  const open = () => changeOpened(true)
+  const close = () => changeOpened(false)
+  const toggle = () => changeOpened(!opened())
 
   function onClickBackdrop(event: Event) {
     if (event.target !== event.currentTarget) return
