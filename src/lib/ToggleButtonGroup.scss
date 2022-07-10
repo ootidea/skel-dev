@@ -1,9 +1,9 @@
-.skel-SingleSelectToggleButtons_root {
+.skel-ToggleButtonGroup_root {
   display: grid;
   grid-auto-flow: column;
   width: max-content;
 
-  &.skel-SingleSelectToggleButtons_full-width {
+  &.skel-ToggleButtonGroup_full-width {
     width: 100%;
   }
 }

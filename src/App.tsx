@@ -21,18 +21,18 @@ import { PopoverComponent } from './page/PopoverComponent'
 import { RadioButtonComponent } from './page/RadioButtonComponent'
 import { ResizableComponent } from './page/ResizableComponent'
 import { SelectComponent } from './page/SelectComponent'
-import { SingleSelectToggleButtonsComponent } from './page/SingleSelectToggleButtonsComponent'
 import { SpinnerComponent } from './page/SpinnerComponent'
 import { StepperComponent } from './page/StepperComponent'
 import { StretchLayoutComponent } from './page/StretchLayoutComponent'
 import { TextInputComponent } from './page/TextInputComponent'
+import { ToggleButtonGroupComponent } from './page/ToggleButtonGroupComponent'
 import { SidebarMenu } from './SidebarMenu'
 
 export function App() {
   const pages = [
     ['Button', ButtonComponent],
     ['IconButton', IconButtonComponent],
-    ['SingleSelectToggleButtons', SingleSelectToggleButtonsComponent],
+    ['ToggleButtonGroup', ToggleButtonGroupComponent],
     ['Checkbox', CheckboxComponent],
     ['RadioButton', RadioButtonComponent],
     ['TextInput', TextInputComponent],
