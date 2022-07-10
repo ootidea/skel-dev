@@ -6,15 +6,15 @@ import './Select.scss'
 import { StretchLayout } from './StretchLayout'
 import { joinClass, joinClassList, prepareProps, SkelProps, toGetters } from './utility/props'
 
-export type SelectProps = SkelProps<{
-  values: string[]
-  titles?: Record<string, string>
-  selectedSignal?: Signal<string | undefined>
+export type SelectProps<T extends string> = SkelProps<{
+  values: readonly T[]
+  titles?: Partial<Record<string, string>>
+  selectedSignal?: Signal<T | undefined>
   placeholder?: string
   disabled?: boolean
 }>
 
-export function Select(rawProps: SelectProps) {
+export function Select<T extends string>(rawProps: SelectProps<T>) {
   const [props, restProps] = prepareProps(
     rawProps,
     {
@@ -26,11 +26,11 @@ export function Select(rawProps: SelectProps) {
   )
 
   function getText(value: string): string {
-    return props.titles[value] ? props.titles[value] : value
+    return props.titles?.[value] ?? value
   }
 
   const [opened, setOpened] = createSignal(false)
-  const [selected, setSelected] = props.selectedSignal ?? createSignal<string | undefined>(undefined)
+  const [selected, setSelected] = props.selectedSignal ?? createSignal<T | undefined>(undefined)
 
   const attrs = mergeProps(
     restProps,
@@ -74,7 +74,7 @@ export function Select(rawProps: SelectProps) {
                   class="skel-Select_option"
                   classList={{ 'skel-Select_selected': selected() === value }}
                   onClick={() => {
-                    setSelected(value)
+                    setSelected(value as Exclude<T, Function>)
                     toggle()
                   }}
                 >

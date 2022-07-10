@@ -39,8 +39,7 @@ export function SingleSelectToggleButtons<T extends readonly string[] | readonly
 
   function clickEventHandler(value: T[number]) {
     if (value !== selected()) {
-      // @ts-ignore May be a TypeScript's bug.
-      setSelected(value)
+      setSelected(value as Exclude<T[number], Function>)
       props.onSelect?.(selected())
     } else if (!props.disableUnselect) {
       setSelected(undefined)
