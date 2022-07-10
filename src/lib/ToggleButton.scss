@@ -5,16 +5,14 @@
   --skel-ToggleButton_text-color: oklch(50% 0 0);
   --skel-ToggleButton_selected-border-color: oklch(70% 0.08 255.4);
   --skel-ToggleButton_selected-text-color: oklch(50% 0.22 255.4);
-  --skel-ToggleButton_selected-background-color: var(--skel-primary-background-color);
+  --skel-ToggleButton_selected-background-color: var(--skel-primary-selected-background-color);
   --skel-ToggleButton_selected-font-weight: inherit;
 }
 
 .skel-ToggleButton_root {
-  //display: flex;
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  //width: max-content;
 
   padding: 0.3em 0.5em;
   border-block: var(--skel-ToggleButton_border);
@@ -55,16 +53,16 @@
       border-left-color: var(--skel-ToggleButton_selected-border-color);
     }
 
-    background-color: var(--skel-ToggleButton_selected-background-color);
+    background-color: var(--skel-primary-selected-background-color);
     color: var(--skel-ToggleButton_selected-text-color);
     font-weight: var(--skel-ToggleButton_selected-font-weight);
 
     &:hover {
-      background-color: var(--skel-primary-background-hover-color);
+      background-color: var(--skel-primary-selected-background-hover-color);
     }
 
     &:active {
-      background-color: var(--skel-primary-background-active-color);
+      background-color: var(--skel-primary-selected-background-active-color);
     }
   }
 }
