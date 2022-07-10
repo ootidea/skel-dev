@@ -1,11 +1,22 @@
 .skel-Resizable_root {
-  display: grid;
-  grid-template-columns: minmax(0, 1fr) auto;
+  position: relative;
 }
 
 .skel-Resizable_resize-handle {
-  width: 1em;
-  background-color: oklch(94% 0 0);
+  display: none;
+
+  position: absolute;
+  right: 0;
+  top: 0;
+  bottom: 0;
+
+  box-sizing: border-box;
+  width: 6px;
+  background-color: var(--skel-primary-color);
 
   cursor: col-resize;
+
+  .skel-Resizable_root:hover & {
+    display: block;
+  }
 }
