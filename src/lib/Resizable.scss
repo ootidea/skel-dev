@@ -1,0 +1,11 @@
+.skel-Resizable_root {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto;
+}
+
+.skel-Resizable_resize-handle {
+  width: 1em;
+  background-color: oklch(94% 0 0);
+
+  cursor: col-resize;
+}

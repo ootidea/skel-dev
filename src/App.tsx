@@ -19,6 +19,7 @@ import { LayerLayoutComponent } from './page/LayerLayoutComponent'
 import { ModalComponent } from './page/ModalComponent'
 import { PopoverComponent } from './page/PopoverComponent'
 import { RadioButtonComponent } from './page/RadioButtonComponent'
+import { ResizableComponent } from './page/ResizableComponent'
 import { SelectComponent } from './page/SelectComponent'
 import { SingleSelectToggleButtonsComponent } from './page/SingleSelectToggleButtonsComponent'
 import { SpinnerComponent } from './page/SpinnerComponent'
@@ -47,6 +48,7 @@ export function App() {
     ['Dropdown', DropdownComponent],
     ['Popover', PopoverComponent],
     ['Foldable', FoldableComponent],
+    ['Resizable', ResizableComponent],
     ['Calendar', CalendarComponent],
     ['DatePicker', DatePickerComponent],
     ['Stepper', StepperComponent],
