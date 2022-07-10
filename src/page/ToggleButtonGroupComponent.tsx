@@ -7,6 +7,8 @@ import { SectionTitle } from '../SectionTitle'
 
 export function ToggleButtonGroupComponent() {
   const [selected, setSelected] = createSignal<'en' | 'zh' | undefined>('en')
+  const selectedSignal = createSignal<Set<'en' | 'zh'>>(new Set(), { equals: false })
+
   return (
     <article>
       <PageTitle>ToggleButtonGroup</PageTitle>
@@ -39,6 +41,8 @@ export function ToggleButtonGroupComponent() {
       <Sample>
         <ToggleButtonGroup exclusive values={['en', 'zh']} selectedSignal={[selected, setSelected]} />
         <div>selected() === {selected() !== undefined ? `'${selected()}'` : 'undefined'}</div>
+        <ToggleButtonGroup values={['en', 'zh']} selectedSignal={selectedSignal} />
+        <div>selected(): {JSON.stringify([...selectedSignal[0]()])}</div>
       </Sample>
 
       <SectionTitle>Default selected</SectionTitle>
@@ -49,11 +53,12 @@ export function ToggleButtonGroupComponent() {
       <SectionTitle>onSelect</SectionTitle>
       <Sample>
         <ToggleButtonGroup values={['Male', 'Female']} onSelect={(value) => alert(value)} />
+        <ToggleButtonGroup exclusive values={['Male', 'Female']} onSelect={(value) => alert(value)} />
       </Sample>
 
       <SectionTitle>Disable unselect</SectionTitle>
       <Sample>
-        <ToggleButtonGroup values={['Male', 'Female']} disableUnselect />
+        <ToggleButtonGroup exclusive values={['Male', 'Female']} disableUnselect />
       </Sample>
 
       <SectionTitle>Full width</SectionTitle>

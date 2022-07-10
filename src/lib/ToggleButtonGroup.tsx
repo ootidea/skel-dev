@@ -48,7 +48,7 @@ export function ToggleButtonGroup<T extends string | number>(rawProps: ToggleBut
 
   const union = call(() => {
     if (rawProps.exclusive) {
-      const [selected, setSelected] = rawProps.selectedSignal ?? createSignal<T | undefined>(undefined)
+      const [selected, setSelected] = rawProps.selectedSignal ?? createSignal<T | undefined>(rawProps.defaultSelected)
       return { exclusive: true, selected, setSelected, disableUnselect: rawProps.disableUnselect } as const
     } else {
       const [selected, setSelected] = rawProps.selectedSignal ?? createSignal<Set<T>>(new Set(), { equals: false })
@@ -77,11 +77,11 @@ export function ToggleButtonGroup<T extends string | number>(rawProps: ToggleBut
       if (union.selected().has(value)) {
         union.selected().delete(value)
         union.setSelected(union.selected())
-        props.onSelect?.(value)
+        props.onUnselect?.(value)
       } else {
         union.selected().add(value)
         union.setSelected(union.selected())
-        props.onUnselect?.(value)
+        props.onSelect?.(value)
       }
     }
   }
