@@ -2,17 +2,20 @@ import { createSignal, mergeProps, Signal } from 'solid-js'
 import './AutoSizeTextArea.scss'
 import { joinClass, prepareProps, SkelProps, toGetters } from './utility/props'
 
-export type AutoSizeTextAreaProps = SkelProps<{ valueSignal?: Signal<string> }, 'textarea'>
+export type AutoSizeTextAreaProps = SkelProps<
+  { defaultValue?: string; valueSignal?: Signal<string>; value?: never },
+  'textarea'
+>
 
 export function AutoSizeTextArea(rawProps: AutoSizeTextAreaProps) {
-  const [props, restProps] = prepareProps(rawProps, {})
+  const [props, restProps] = prepareProps(rawProps, { defaultValue: '' })
   const attrs = mergeProps(
     restProps,
     toGetters({
       class: () => joinClass(rawProps.class, 'skel-AutoSizeTextArea_text-area'),
     })
   )
-  const [value, setValue] = rawProps.valueSignal ?? createSignal('')
+  const [value, setValue] = rawProps.valueSignal ?? createSignal(props.defaultValue)
 
   function onInput(event: InputEvent) {
     if (event.target instanceof HTMLTextAreaElement) {
@@ -28,7 +31,7 @@ export function AutoSizeTextArea(rawProps: AutoSizeTextAreaProps) {
         {value() ? value() : rawProps.placeholder}
         {ZERO_WIDTH_SPACE}
       </div>
-      <textarea onInput={onInput} {...attrs} />
+      <textarea value={value()} onInput={onInput} {...attrs} />
     </div>
   )
 }
