@@ -37,23 +37,18 @@ export function ToggleButtonGroupComponent() {
         </ToggleButtonGroup>
       </Sample>
 
+      <SectionTitle>Default selected</SectionTitle>
+      <Sample>
+        <ToggleButtonGroup exclusive values={['Male', 'Female']} selected="Male" />
+        <ToggleButtonGroup values={['en', 'zh']} selected={new Set(['en', 'zh'])} />
+      </Sample>
+
       <SectionTitle>Bind to signal</SectionTitle>
       <Sample>
         <ToggleButtonGroup exclusive values={['en', 'zh']} selected={selected1()} onChangeSelected={setSelected1} />
         <div>selected1() === {selected1() !== undefined ? `'${selected1()}'` : 'undefined'}</div>
         <ToggleButtonGroup values={['en', 'zh']} selected={selected2()} onChangeSelected={setSelected2} />
-        <div>selected2() is new Set({JSON.stringify([...selected2()])})</div>
-      </Sample>
-
-      <SectionTitle>Default selected</SectionTitle>
-      <Sample>
-        <ToggleButtonGroup exclusive values={['Male', 'Female']} selected="Male" />
-      </Sample>
-
-      <SectionTitle>onSelect</SectionTitle>
-      <Sample>
-        <ToggleButtonGroup values={['Male', 'Female']} onSelect={(value) => alert(value)} />
-        <ToggleButtonGroup exclusive values={['Male', 'Female']} onSelect={(value) => alert(value)} />
+        <div>selected2() equals new Set({JSON.stringify([...selected2()])})</div>
       </Sample>
 
       <SectionTitle>Disable unselect</SectionTitle>
