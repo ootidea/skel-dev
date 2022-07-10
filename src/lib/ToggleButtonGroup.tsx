@@ -1,6 +1,5 @@
 import { createSignal, For, mergeProps, Signal } from 'solid-js'
 import { Slot } from './Slot'
-import { ToggleButton } from './ToggleButton'
 import './ToggleButtonGroup.scss'
 import { call } from './utility/others'
 import { joinClass, joinClassList, prepareProps, SkelProps, SkelSlot, toGetters } from './utility/props'
@@ -39,7 +38,11 @@ export function ToggleButtonGroup<T extends string | number>(rawProps: ToggleBut
     restProps,
     toGetters({
       class: () => joinClass(rawProps.class, 'skel-ToggleButtonGroup_root'),
-      classList: () => joinClassList(rawProps.classList, { 'skel-ToggleButtonGroup_full-width': props.fullWidth }),
+      classList: () =>
+        joinClassList(rawProps.classList, {
+          'skel-ToggleButtonGroup_full-width': props.fullWidth,
+          'skel-ToggleButtonGroup_exclusive': props.exclusive,
+        }),
     })
   )
 
@@ -87,11 +90,15 @@ export function ToggleButtonGroup<T extends string | number>(rawProps: ToggleBut
     <div {...attrs}>
       <For each={props.values}>
         {(value: T) => (
-          <ToggleButton selected={isSelected(value)} onClick={() => clickEventHandler(value)}>
+          <div
+            class="skel-ToggleButtonGroup_button"
+            classList={{ 'skel-ToggleButton_selected': isSelected(value) }}
+            onClick={() => clickEventHandler(value)}
+          >
             <Slot content={props.children} params={{ value }}>
               {props.titles?.[String(value)] ?? value}
             </Slot>
-          </ToggleButton>
+          </div>
         )}
       </For>
     </div>

@@ -1,3 +1,14 @@
+:root {
+  --skel-ToggleButtonGroup_border-radius: 0.4em;
+  --skel-ToggleButtonGroup_border: var(--skel-ToggleButtonGroup_border-color) 1px solid;
+  --skel-ToggleButtonGroup_border-color: oklch(80% 0 0);
+  --skel-ToggleButtonGroup_text-color: oklch(50% 0 0);
+  --skel-ToggleButtonGroup_selected-border-color: oklch(70% 0.08 255.4);
+  --skel-ToggleButtonGroup_selected-text-color: oklch(50% 0.22 255.4);
+  --skel-ToggleButtonGroup_selected-background-color: var(--skel-primary-selected-background-color);
+  --skel-ToggleButtonGroup_selected-font-weight: inherit;
+}
+
 .skel-ToggleButtonGroup_root {
   display: grid;
   grid-auto-flow: column;
@@ -5,5 +16,63 @@
 
   &.skel-ToggleButtonGroup_full-width {
     width: 100%;
+  }
+}
+
+.skel-ToggleButtonGroup_button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+
+  padding: 0.3em 0.5em;
+  border-block: var(--skel-ToggleButtonGroup_border);
+  border-left: var(--skel-ToggleButtonGroup_border);
+
+  color: var(--skel-ToggleButtonGroup_text-color);
+
+  cursor: pointer;
+
+  transition: var(--skel-backward-transition);
+
+  &:first-of-type {
+    border-top-left-radius: var(--skel-ToggleButtonGroup_border-radius);
+    border-bottom-left-radius: var(--skel-ToggleButtonGroup_border-radius);
+  }
+
+  &:last-of-type {
+    border-top-right-radius: var(--skel-ToggleButtonGroup_border-radius);
+    border-bottom-right-radius: var(--skel-ToggleButtonGroup_border-radius);
+
+    border-right: var(--skel-ToggleButtonGroup_border);
+  }
+
+  &:hover {
+    background-color: var(--skel-clickable-hover-background-color);
+    transition: var(--skel-forward-transition);
+  }
+
+  &:active {
+    background-color: var(--skel-clickable-active-background-color);
+    transition: var(--skel-forward-transition);
+  }
+
+  &.skel-ToggleButton_selected {
+    border-color: var(--skel-ToggleButtonGroup_selected-border-color);
+
+    & + .skel-ToggleButtonGroup_button {
+      border-left-color: var(--skel-ToggleButtonGroup_selected-border-color);
+    }
+
+    background-color: var(--skel-primary-selected-background-color);
+    color: var(--skel-ToggleButtonGroup_selected-text-color);
+    font-weight: var(--skel-ToggleButtonGroup_selected-font-weight);
+
+    &:hover {
+      background-color: var(--skel-primary-selected-background-hover-color);
+    }
+
+    &:active {
+      background-color: var(--skel-primary-selected-background-active-color);
+    }
   }
 }
