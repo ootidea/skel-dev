@@ -19,20 +19,21 @@ export function Resizable(rawProps: ResizableProps) {
   )
 
   let rootElement: HTMLDivElement | undefined = undefined
-  let dragStartCoordinate: { x: number; y: number } | undefined = undefined
+  let dragState: { deltaX: number } | undefined = undefined
 
   function onMouseDown(event: MouseEvent) {
-    dragStartCoordinate = { x: event.clientX, y: event.clientY }
+    assertNonUndefined(rootElement)
+    dragState = { deltaX: event.clientX - rootElement.getBoundingClientRect().right }
     document.body.addEventListener('mousemove', onMouseMove)
   }
 
   function onMouseMove(event: MouseEvent) {
     // if left mouse button is not pressed
     if ((event.buttons & 1) === 0) {
-      dragStartCoordinate = undefined
+      dragState = undefined
     }
 
-    if (dragStartCoordinate === undefined) {
+    if (dragState === undefined) {
       document.body.removeEventListener('mousemove', onMouseMove)
       return
     }
@@ -40,7 +41,7 @@ export function Resizable(rawProps: ResizableProps) {
     assertNonUndefined(rootElement)
     const right = event.clientX
     const left = rootElement.getBoundingClientRect().left
-    setWidth(right - left)
+    setWidth(right - left - dragState.deltaX)
   }
 
   return (
