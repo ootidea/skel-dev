@@ -1,4 +1,4 @@
-import { createSignal, For, mergeProps, Show } from 'solid-js'
+import { createSignal, For, mergeProps, Show, Signal } from 'solid-js'
 import { Divider } from './Divider'
 import { Dropdown } from './Dropdown'
 import { Icon } from './Icon'
@@ -9,6 +9,7 @@ import { joinClass, joinClassList, prepareProps, SkelProps, toGetters } from './
 export type SelectProps = SkelProps<{
   values: string[]
   titles?: Record<string, string>
+  selectedSignal?: Signal<string | undefined>
   placeholder?: string
   disabled?: boolean
 }>
@@ -21,7 +22,7 @@ export function Select(rawProps: SelectProps) {
       placeholder: '',
       disabled: false,
     },
-    ['values']
+    ['values', 'selectedSignal']
   )
 
   function getText(value: string): string {
@@ -29,7 +30,7 @@ export function Select(rawProps: SelectProps) {
   }
 
   const [opened, setOpened] = createSignal(false)
-  const [selected, setSelected] = createSignal<string | undefined>(undefined)
+  const [selected, setSelected] = props.selectedSignal ?? createSignal<string | undefined>(undefined)
 
   const attrs = mergeProps(
     restProps,
