@@ -8,6 +8,8 @@ export default defineConfig({
   build: {
     target: 'esnext',
     polyfillDynamicImport: false,
+    // Prevent renaming of component functions to simplify sidebar code.
+    minify: false,
   },
   css: {
     postcss: {
