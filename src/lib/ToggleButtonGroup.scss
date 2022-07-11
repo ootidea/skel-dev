@@ -25,9 +25,10 @@
   justify-content: center;
 
   padding: 0.3em 0.5em;
-  border-block: var(--skel-ToggleButtonGroup_border);
-  border-left: var(--skel-ToggleButtonGroup_border);
+  border: var(--skel-ToggleButtonGroup_border);
+  border-right: none;
 
+  background: transparent;
   color: var(--skel-ToggleButtonGroup_text-color);
 
   cursor: pointer;

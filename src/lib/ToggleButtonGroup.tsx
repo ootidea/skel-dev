@@ -101,7 +101,7 @@ export function ToggleButtonGroup<T extends string | number>(rawProps: ToggleBut
     <div {...attrs}>
       <For each={props.values}>
         {(value: T) => (
-          <div
+          <button
             class="skel-ToggleButtonGroup_button"
             classList={{ 'skel-ToggleButton_selected': isSelected(value) }}
             onClick={() => clickEventHandler(value)}
@@ -109,7 +109,7 @@ export function ToggleButtonGroup<T extends string | number>(rawProps: ToggleBut
             <Slot content={props.children} params={{ value }}>
               {props.titles?.[String(value)] ?? value}
             </Slot>
-          </div>
+          </button>
         )}
       </For>
     </div>
