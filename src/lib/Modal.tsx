@@ -1,5 +1,7 @@
+import closeIcon from '/src/close.svg'
 import { createEffect, createSignal, mergeProps, Show } from 'solid-js'
 import './common.scss'
+import { IconButton } from './IconButton'
 import './Modal.scss'
 import { Slot } from './Slot'
 import { joinClass, prepareProps, SkelProps, SkelSlot, toGetters } from './utility/props'
@@ -7,6 +9,7 @@ import { joinClass, prepareProps, SkelProps, SkelSlot, toGetters } from './utili
 export type ModalProps = SkelProps<{
   opened?: boolean
   persistent?: boolean
+  showCloseButton?: boolean
   onChangeOpened?: (opened: boolean) => unknown
   launcher?: SkelSlot<{ open: () => void; close: () => void; toggle: () => void }>
   children?: SkelSlot<{ open: () => void; close: () => void; toggle: () => void }>
@@ -18,6 +21,7 @@ export function Modal(rawProps: ModalProps) {
     {
       persistent: false,
       opened: false,
+      showCloseButton: false,
     },
     ['launcher', 'onChangeOpened']
   )
@@ -54,6 +58,11 @@ export function Modal(rawProps: ModalProps) {
       <Show when={opened()}>
         <div onClick={onClickBackdrop} {...attrs}>
           <div class="skel-Modal_frame">
+            <Show when={props.showCloseButton}>
+              <div class="skel-Modal_header">
+                <IconButton src={closeIcon} onClick={close} />
+              </div>
+            </Show>
             <Slot content={rawProps.children} params={{ open, close, toggle }} />
           </div>
         </div>

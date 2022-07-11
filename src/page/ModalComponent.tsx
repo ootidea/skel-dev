@@ -14,8 +14,7 @@ export function ModalComponent() {
 
       <Sample>
         <Modal launcher={({ open }) => <Button onClick={open}>Open</Button>}>
-          <h1>Title</h1>
-          <p>contents</p>
+          <div style="padding: 1em">This is sample text for Modal component.</div>
         </Modal>
       </Sample>
 
@@ -32,6 +31,13 @@ export function ModalComponent() {
         opened() === {String(opened())}
         <Modal opened={opened()} onChangeOpened={setOpened}>
           <Button onClick={() => setOpened(false)}>Close</Button>
+        </Modal>
+      </Sample>
+
+      <SectionTitle>Close button</SectionTitle>
+      <Sample>
+        <Modal showCloseButton launcher={({ open }) => <Button onClick={open}>Open</Button>}>
+          <div style="padding: 1em">This is sample text for Modal component.</div>
         </Modal>
       </Sample>
     </article>
