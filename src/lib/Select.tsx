@@ -1,3 +1,4 @@
+import chevronDown from '/src/chevron-down.svg'
 import { createEffect, createSignal, For, mergeProps, Show } from 'solid-js'
 import { Divider } from './Divider'
 import { Dropdown } from './Dropdown'
@@ -66,7 +67,7 @@ export function Select<T extends string>(rawProps: SelectProps<T>) {
               {props.placeholder}
             </div>
           </div>
-          <Icon class="skel-Select_icon" src="/src/chevron-down.svg" />
+          <Icon class="skel-Select_icon" src={chevronDown} />
         </StretchLayout>
       )}
     >

@@ -1,3 +1,5 @@
+import formatAlignLeft from '/src/format-align-left.svg'
+import formatAlignRight from '/src/format-align-right.svg'
 import { createSignal } from 'solid-js'
 import { Icon } from '../lib/Icon'
 import { ToggleButtonGroup } from '../lib/ToggleButtonGroup'
@@ -33,7 +35,7 @@ export function ToggleButtonGroupComponent() {
       <SectionTitle>Icons</SectionTitle>
       <Sample>
         <ToggleButtonGroup values={['left', 'right']}>
-          {({ value }) => <Icon src={`src/format-align-${value}.svg`} />}
+          {({ value }) => <Icon src={{ left: formatAlignLeft, right: formatAlignRight }[value]} />}
         </ToggleButtonGroup>
       </Sample>
 

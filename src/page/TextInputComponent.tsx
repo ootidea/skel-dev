@@ -1,3 +1,6 @@
+import alertOutline from '/src/alert-outline.svg'
+import check from '/src/check.svg'
+import search from '/src/search.svg'
 import { createSignal } from 'solid-js'
 import { Icon } from '../lib/Icon'
 import { Spinner } from '../lib/Spinner'
@@ -38,15 +41,15 @@ export function TextInputComponent() {
 
       <SectionTitle>Append and prepend</SectionTitle>
       <Sample>
-        <TextInput value="valid text" append={<Icon src="/src/check.svg" />} />
-        <TextInput placeholder="security number" prepend={<Icon src="/src/alert-outline.svg" />} />
+        <TextInput value="valid text" append={<Icon src={check} />} />
+        <TextInput placeholder="security number" prepend={<Icon src={alertOutline} />} />
         <TextInput placeholder="Search" append={<Spinner />} />
       </Sample>
 
       <SectionTitle>Prefix and postfix</SectionTitle>
       <Sample>
         <TextInput placeholder="www.example" prefix="http://" postfix=".com" />
-        <TextInput placeholder="Search" postfix={<Icon src="/src/search.svg" />} />
+        <TextInput placeholder="Search" postfix={<Icon src={search} />} />
       </Sample>
 
       <SectionTitle>Disabled</SectionTitle>

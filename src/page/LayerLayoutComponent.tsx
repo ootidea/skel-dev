@@ -1,3 +1,6 @@
+import chevronLeft from '/src/chevron-left.svg'
+import chevronRight from '/src/chevron-right.svg'
+import search from '/src/search.svg'
 import { Gravity } from '../lib/Gravity'
 import { IconButton } from '../lib/IconButton'
 import { LayerLayout } from '../lib/LayerLayout'
@@ -13,7 +16,7 @@ export function LayerLayoutComponent() {
       <SectionTitle>Badge</SectionTitle>
       <Sample>
         <LayerLayout>
-          <IconButton src="/src/search.svg" size="3em" />
+          <IconButton src={search} size="3em" />
           <Gravity to="top right">
             <Gravity
               style={{
@@ -47,8 +50,8 @@ export function LayerLayoutComponent() {
               'pointer-events': 'auto',
             }}
           >
-            <IconButton src="/src/chevron-left.svg" size="2em" iconColor="white" backgroundColor="hsl(0 0% 40% 0.5)" />
-            <IconButton src="/src/chevron-right.svg" size="2em" iconColor="white" backgroundColor="hsl(0 0% 40% 0.5)" />
+            <IconButton src={chevronLeft} size="2em" iconColor="white" backgroundColor="hsl(0 0% 40% 0.5)" />
+            <IconButton src={chevronRight} size="2em" iconColor="white" backgroundColor="hsl(0 0% 40% 0.5)" />
           </div>
         </LayerLayout>
       </Sample>

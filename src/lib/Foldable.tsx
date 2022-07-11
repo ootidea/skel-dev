@@ -1,3 +1,4 @@
+import chevronDown from '/src/chevron-down.svg'
 import { createSignal, mergeProps, Show } from 'solid-js'
 import { Divider } from './Divider'
 import './Foldable.scss'
@@ -56,7 +57,7 @@ export function Foldable(rawProps: FoldableProps) {
         </div>
         <Gravity>
           <Slot content={rawProps.icon} params={{ fold, unfold, toggle, unfolded: unfolded() }}>
-            <Icon class="skel-Foldable_icon" src="src/chevron-down.svg" />
+            <Icon class="skel-Foldable_icon" src={chevronDown} />
           </Slot>
         </Gravity>
       </StretchLayout>

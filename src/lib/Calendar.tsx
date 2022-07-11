@@ -1,3 +1,5 @@
+import chevronLeft from '/src/chevron-left.svg'
+import chevronRight from '/src/chevron-right.svg'
 import dayjs, { Dayjs } from 'dayjs'
 import { createEffect, createSignal, For, mergeProps, Show } from 'solid-js'
 import './Calendar.scss'
@@ -49,7 +51,7 @@ export function Calendar(rawProps: CalendarProps) {
     <div {...attrs}>
       <div class="skel-Calendar_year-month-area">
         <IconButton
-          src="src/chevron-left.svg"
+          src={chevronLeft}
           onClick={() => setSelectedMonth_(selectedMonth_().subtract(1, 'month'))}
           size="1.6em"
         />
@@ -59,7 +61,7 @@ export function Calendar(rawProps: CalendarProps) {
           <span class="skel-Calendar_month">{selectedMonth_().format('M')}月</span>
         </div>
         <IconButton
-          src="src/chevron-right.svg"
+          src={chevronRight}
           onClick={() => setSelectedMonth_(selectedMonth_().add(1, 'month'))}
           size="1.6em"
         />
