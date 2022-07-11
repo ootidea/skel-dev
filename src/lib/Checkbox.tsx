@@ -1,10 +1,14 @@
 import { mergeProps } from 'solid-js'
 import './Checkbox.scss'
-import { Arrow } from './utility/others'
 import { joinClass, joinClassList, prepareProps, SkelProps, toGetters } from './utility/props'
 
 export type CheckboxProps = SkelProps<
-  { checked?: boolean; value?: string | undefined; disabled?: boolean; onChange?: Arrow<[boolean, Event], unknown> },
+  {
+    checked?: boolean
+    value?: string | undefined
+    disabled?: boolean
+    onChangeChecked?: (checked: boolean) => unknown
+  },
   'label'
 >
 
@@ -16,7 +20,7 @@ export function Checkbox(rawProps: CheckboxProps) {
       value: undefined,
       disabled: false,
     },
-    ['onChange']
+    ['onChangeChecked']
   )
   const attrs = mergeProps(
     restProps,
@@ -28,7 +32,7 @@ export function Checkbox(rawProps: CheckboxProps) {
 
   function onChange(event: Event) {
     if (event.target instanceof HTMLInputElement) {
-      props.onChange?.(event.target.checked, event)
+      props.onChangeChecked?.(event.target.checked)
     }
   }
 
