@@ -40,6 +40,7 @@
   display: flex;
   align-items: center;
   justify-content: center;
+  box-sizing: border-box;
   width: var(--skel-Stepper_circle-size);
   height: var(--skel-Stepper_circle-size);
   border-radius: 99999px;
@@ -54,7 +55,9 @@
   }
 
   &.skel-Stepper_current-step {
-    background-color: var(--skel-primary-color);
+    background-color: var(--skel-background-color);
+    border: 0.2em solid var(--skel-primary-color);
+    color: var(--skel-primary-color);
   }
 }
 
