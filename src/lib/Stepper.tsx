@@ -37,7 +37,14 @@ export function Stepper(rawProps: StepperProps) {
           <For each={until(props.titles.length)}>
             {(i) => (
               <Gravity>
-                <div class="skel-Stepper_circle" classList={{ 'skel-Stepper_reached': i <= props.currentStep }}>
+                <div
+                  class="skel-Stepper_circle"
+                  classList={{
+                    'skel-Stepper_past-step': i < props.currentStep,
+                    'skel-Stepper_current-step': i === props.currentStep,
+                    'skel-Stepper_future-step': i > props.currentStep,
+                  }}
+                >
                   {i + 1}
                 </div>
               </Gravity>
@@ -48,7 +55,14 @@ export function Stepper(rawProps: StepperProps) {
       <div class="skel-Stepper_titles-area" style={{ 'grid-template-columns': `repeat(${props.titles.length}, 1fr)` }}>
         <For each={props.titles}>
           {(title, i) => (
-            <div class="skel-Stepper_title" classList={{ 'skel-Stepper_reached': i() <= props.currentStep }}>
+            <div
+              class="skel-Stepper_title"
+              classList={{
+                'skel-Stepper_past-step': i() < props.currentStep,
+                'skel-Stepper_current-step': i() === props.currentStep,
+                'skel-Stepper_future-step': i() > props.currentStep,
+              }}
+            >
               {title}
             </div>
           )}

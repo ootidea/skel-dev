@@ -49,7 +49,11 @@
   font-size: 1.2em;
   font-weight: bold;
 
-  &.skel-Stepper_reached {
+  &.skel-Stepper_past-step {
+    background-color: var(--skel-primary-color);
+  }
+
+  &.skel-Stepper_current-step {
     background-color: var(--skel-primary-color);
   }
 }
@@ -66,7 +70,11 @@
   color: oklch(70% 0 0);
   font-weight: bold;
 
-  &.skel-Stepper_reached {
+  &.skel-Stepper_past-step {
+    color: oklch(50% 0 0);
+  }
+
+  &.skel-Stepper_current-step {
     color: var(--skel-primary-color);
   }
 }
