@@ -1,3 +1,4 @@
+import { createSignal } from 'solid-js'
 import { Icon } from '../lib/Icon'
 import { Spinner } from '../lib/Spinner'
 import { TextInput } from '../lib/TextInput'
@@ -6,6 +7,8 @@ import { Sample } from '../Sample'
 import { SectionTitle } from '../SectionTitle'
 
 export function TextInputComponent() {
+  const [value, setValue] = createSignal('default value')
+
   return (
     <article>
       <PageTitle>TextInput</PageTitle>
@@ -14,10 +17,16 @@ export function TextInputComponent() {
         <TextInput />
       </Sample>
 
-      <SectionTitle>Placeholder and initial value</SectionTitle>
+      <SectionTitle>Placeholder and default value</SectionTitle>
       <Sample>
         <TextInput placeholder="placeholder" />
-        <TextInput value="initial value" />
+        <TextInput value="default value" />
+      </Sample>
+
+      <SectionTitle>Bind to signal</SectionTitle>
+      <Sample>
+        <TextInput value={value()} onChangeValue={setValue} />
+        <div>value() === '{value()}'</div>
       </Sample>
 
       <SectionTitle>Types</SectionTitle>
@@ -36,14 +45,14 @@ export function TextInputComponent() {
 
       <SectionTitle>Prefix and postfix</SectionTitle>
       <Sample>
-        <TextInput placeholder="www.example" prefix="http://" postfix=".com"></TextInput>
-        <TextInput placeholder="Search" postfix={<Icon src="/src/search.svg" />}></TextInput>
+        <TextInput placeholder="www.example" prefix="http://" postfix=".com" />
+        <TextInput placeholder="Search" postfix={<Icon src="/src/search.svg" />} />
       </Sample>
 
       <SectionTitle>Disabled</SectionTitle>
       <Sample>
         <TextInput placeholder="placeholder" disabled />
-        <TextInput value="initial value" disabled />
+        <TextInput value="default value" disabled />
       </Sample>
     </article>
   )

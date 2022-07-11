@@ -10,6 +10,7 @@ export type TextInputProps = SkelProps<
     postfix?: JSX.Element
     prepend?: JSX.Element
     append?: JSX.Element
+    onChangeValue?: (value: string) => unknown
   },
   'input'
 >
@@ -23,6 +24,7 @@ export function TextInput(rawProps: TextInputProps) {
     'postfix',
     'prepend',
     'append',
+    'onChangeValue',
   ])
   const attrs = mergeProps(
     props,
@@ -32,12 +34,18 @@ export function TextInput(rawProps: TextInputProps) {
     })
   )
 
+  function onInput(event: InputEvent) {
+    if (event.target instanceof HTMLInputElement) {
+      props.onChangeValue?.(event.target.value)
+    }
+  }
+
   return (
     <StretchLayout stretchAt={1} class={attrs.class} classList={attrs.classList} style={attrs.style}>
       <Gravity class="skel-TextInput_prefix">{rawProps.prefix}</Gravity>
       <StretchLayout class="skel-TextInput_inner" stretchAt={1}>
         <Gravity class="skel-TextInput_prepend">{rawProps.prepend}</Gravity>
-        <input class="skel-TextInput_input" {...inputElementAttrs} />
+        <input class="skel-TextInput_input" onInput={onInput} {...inputElementAttrs} />
         <Gravity class="skel-TextInput_append">{rawProps.append}</Gravity>
       </StretchLayout>
       <Gravity class="skel-TextInput_postfix">{rawProps.postfix}</Gravity>
