@@ -1,4 +1,4 @@
-import { createSignal, mergeProps } from 'solid-js'
+import { createSignal, mergeProps, Show } from 'solid-js'
 import './Resizable.scss'
 import { assertNonUndefined } from './utility/others'
 import { joinClass, joinStyle, prepareProps, SkelProps, toGetters } from './utility/props'
@@ -48,7 +48,9 @@ export function Resizable(rawProps: ResizableProps) {
 
   return (
     <div ref={rootElement} {...attrs}>
-      <div>{rawProps.children}</div>
+      <Show when={rawProps.children instanceof Array} fallback={rawProps.children}>
+        <div>{rawProps.children}</div>
+      </Show>
       <div class="skel-Resizable_resize-handle" onMouseDown={onMouseDown}></div>
     </div>
   )

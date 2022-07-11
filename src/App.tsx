@@ -2,6 +2,7 @@ import { Route, Router, Routes } from 'solid-app-router'
 import { For } from 'solid-js'
 import classes from './App.module.scss'
 import { Divider } from './lib/Divider'
+import { Resizable } from './lib/Resizable'
 import { StretchLayout } from './lib/StretchLayout'
 import { AutoSizeTextAreaComponent } from './page/AutoSizeTextAreaComponent'
 import { ButtonComponent } from './page/ButtonComponent'
@@ -60,9 +61,11 @@ export function App() {
   return (
     <Router>
       <StretchLayout style={{ height: '100%' }} stretchAt={2}>
-        <nav class={classes.sidebar}>
-          <For each={pages}>{(component) => <SidebarMenu componentName={getName(component)} />}</For>
-        </nav>
+        <Resizable class={classes.sidebar}>
+          <nav class={classes.sidebarContent}>
+            <For each={pages}>{(component) => <SidebarMenu componentName={getName(component)} />}</For>
+          </nav>
+        </Resizable>
         <Divider direction="vertical" />
         <main class={classes.main}>
           <Routes>

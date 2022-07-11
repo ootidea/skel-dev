@@ -3,7 +3,7 @@
 }
 
 .skel-Resizable_resize-handle {
-  display: none;
+  visibility: hidden;
 
   position: absolute;
   right: 0;
@@ -15,8 +15,9 @@
   background-color: var(--skel-primary-color);
 
   cursor: col-resize;
+  user-select: none;
 
   .skel-Resizable_root:hover & {
-    display: block;
+    visibility: visible;
   }
 }
