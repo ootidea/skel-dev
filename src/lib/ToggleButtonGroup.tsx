@@ -2,7 +2,7 @@ import { createEffect, createSignal, For, mergeProps } from 'solid-js'
 import { Slot } from './Slot'
 import './ToggleButtonGroup.scss'
 import { call } from './utility/others'
-import { joinClass, joinClassList, prepareProps, SkelProps, SkelSlot, toGetters } from './utility/props'
+import { joinClasses, prepareProps, SkelProps, SkelSlot, toGetters } from './utility/props'
 
 export type ToggleButtonGroupProps<T extends string | number> = SkelProps<
   (
@@ -36,9 +36,8 @@ export function ToggleButtonGroup<T extends string | number>(rawProps: ToggleBut
   const attrs = mergeProps(
     restProps,
     toGetters({
-      class: () => joinClass(rawProps.class, 'skel-ToggleButtonGroup_root'),
-      classList: () =>
-        joinClassList(rawProps.classList, {
+      class: () =>
+        joinClasses(rawProps, 'skel-ToggleButtonGroup_root', {
           'skel-ToggleButtonGroup_full-width': props.fullWidth,
           'skel-ToggleButtonGroup_exclusive': props.exclusive,
         }),

@@ -1,6 +1,6 @@
 import { createEffect, createSignal, mergeProps } from 'solid-js'
 import './AutoSizeTextArea.scss'
-import { joinClass, prepareProps, SkelProps, toGetters } from './utility/props'
+import { joinClasses, prepareProps, SkelProps, toGetters } from './utility/props'
 
 export type AutoSizeTextAreaProps = SkelProps<
   { value?: string; onChangeValue?: (value: string) => unknown },
@@ -12,7 +12,7 @@ export function AutoSizeTextArea(rawProps: AutoSizeTextAreaProps) {
   const attrs = mergeProps(
     restProps,
     toGetters({
-      class: () => joinClass(rawProps.class, 'skel-AutoSizeTextArea_text-area'),
+      class: () => joinClasses(rawProps, 'skel-AutoSizeTextArea_text-area'),
     })
   )
   const [value, setValue] = createSignal(rawProps.value)

@@ -6,7 +6,7 @@ import './Calendar.scss'
 import { IconButton } from './IconButton'
 import { Slot } from './Slot'
 import { until } from './utility/others'
-import { joinClass, prepareProps, SkelProps, SkelSlot, toGetters } from './utility/props'
+import { joinClasses, prepareProps, SkelProps, SkelSlot, toGetters } from './utility/props'
 
 export type CalendarProps = SkelProps<{
   month?: Date
@@ -25,7 +25,7 @@ export function Calendar(rawProps: CalendarProps) {
   const attrs = mergeProps(
     restProps,
     toGetters({
-      class: () => joinClass(rawProps.class, 'skel-Calendar_root'),
+      class: () => joinClasses(rawProps, 'skel-Calendar_root'),
     })
   )
 

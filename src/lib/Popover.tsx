@@ -2,7 +2,7 @@ import { createSignal, mergeProps, onCleanup, onMount, Show } from 'solid-js'
 import './Popover.scss'
 import { Slot } from './Slot'
 import { EnneaPosition, isInsideOf, toOpposite, toXPercent, toYPercent } from './utility/others'
-import { joinClass, joinStyle, prepareProps, SkelProps, SkelSlot, toGetters } from './utility/props'
+import { joinClasses, joinStyle, prepareProps, SkelProps, SkelSlot, toGetters } from './utility/props'
 
 export type PopoverProps = SkelProps<{
   on?: EnneaPosition
@@ -21,7 +21,7 @@ export function Popover(rawProps: PopoverProps) {
   const attrs = mergeProps(
     restProps,
     toGetters({
-      class: () => joinClass(rawProps.class, 'skel-Popover_root'),
+      class: () => joinClasses(rawProps, 'skel-Popover_root'),
       style: () =>
         joinStyle(rawProps.style, {
           '--skel-Popover_left': toXPercent(props.on),

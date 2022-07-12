@@ -4,7 +4,7 @@ import { Gravity } from './Gravity'
 import { LayerLayout } from './LayerLayout'
 import './Stepper.scss'
 import { until } from './utility/others'
-import { joinClass, prepareProps, SkelProps, toGetters } from './utility/props'
+import { joinClasses, prepareProps, SkelProps, toGetters } from './utility/props'
 
 export type StepperProps = SkelProps<{ titles: string[]; currentStep: number }>
 
@@ -13,7 +13,7 @@ export function Stepper(rawProps: StepperProps) {
   const attrs = mergeProps(
     restProps,
     toGetters({
-      class: () => joinClass(rawProps.class, 'skel-Stepper_root'),
+      class: () => joinClasses(rawProps, 'skel-Stepper_root'),
     })
   )
 

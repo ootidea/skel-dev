@@ -5,7 +5,7 @@ import { Dropdown } from './Dropdown'
 import { Icon } from './Icon'
 import './Select.scss'
 import { StretchLayout } from './StretchLayout'
-import { joinClass, joinClassList, prepareProps, SkelProps, toGetters } from './utility/props'
+import { joinClasses, prepareProps, SkelProps, toGetters } from './utility/props'
 
 export type SelectProps<T extends string> = SkelProps<{
   values: readonly T[]
@@ -38,9 +38,11 @@ export function Select<T extends string>(rawProps: SelectProps<T>) {
   const attrs = mergeProps(
     restProps,
     toGetters({
-      class: () => joinClass(rawProps.class, 'skel-Select_root'),
-      classList: () =>
-        joinClassList(rawProps.classList, { 'skel-Select_disabled': props.disabled, 'skel-Select_opened': opened() }),
+      class: () =>
+        joinClasses(rawProps, 'skel-Select_root', {
+          'skel-Select_disabled': props.disabled,
+          'skel-Select_opened': opened(),
+        }),
     })
   )
 

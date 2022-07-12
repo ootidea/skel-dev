@@ -2,7 +2,7 @@ import { createEffect, createSignal, mergeProps, onCleanup, onMount } from 'soli
 import './Dropdown.scss'
 import { Slot } from './Slot'
 import { assertNonUndefined, isInsideOf, observeWidth } from './utility/others'
-import { joinClass, joinStyle, prepareProps, SkelProps, SkelSlot, toGetters } from './utility/props'
+import { joinClasses, joinStyle, prepareProps, SkelProps, SkelSlot, toGetters } from './utility/props'
 
 export type DropdownProps = SkelProps<{
   opened?: boolean
@@ -42,7 +42,7 @@ export function Dropdown(rawProps: DropdownProps) {
   const attrs = mergeProps(
     restProps,
     toGetters({
-      class: () => joinClass(rawProps.class, 'skel-Dropdown_root'),
+      class: () => joinClasses(rawProps, 'skel-Dropdown_root'),
       style: () =>
         joinStyle(rawProps.style, {
           '--skel-Dropdown_content-width': `${contentWidth()}px`,

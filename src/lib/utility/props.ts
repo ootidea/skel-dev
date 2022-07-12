@@ -73,19 +73,20 @@ export function prepareProps<T, U extends Pick<T, OptionalKeys<T>>>(
   return splitProps(mergeProps(defaultValues, rawProps), otherKnownKeys.concat(keys)) as any
 }
 
-export function joinClass(injectedClass: string | undefined, baseClass: string): string {
-  if (injectedClass === undefined) return baseClass
-
-  return `${baseClass} ${injectedClass}`
-}
-
-export function joinClassList(
-  injectedClassList: Record<string, boolean | undefined> | undefined,
-  classList: Record<string, boolean | undefined>
-): Record<string, boolean | undefined> {
-  if (injectedClassList === undefined) return classList
-
-  return Object.assign({}, classList, injectedClassList)
+export function joinClasses(
+  props: { class?: string; classList?: Record<string, boolean | undefined> },
+  baseClass: string,
+  baseClassList?: Record<string, boolean | undefined>
+) {
+  const joinedClassList = Object.entries(props.classList ?? {})
+    .filter(([, value]) => Boolean(value))
+    .map(([key]) => key)
+    .join(' ')
+  const joinedBaseClassList = Object.entries(baseClassList ?? {})
+    .filter(([, value]) => Boolean(value))
+    .map(([key]) => key)
+    .join(' ')
+  return [baseClass, props.class ?? '', joinedBaseClassList, joinedClassList].join(' ').trim()
 }
 
 export function joinStyle(injectedStyle: JSX.CSSProperties | string | undefined, baseStyle: JSX.CSSProperties): string {

@@ -7,7 +7,7 @@ import { Icon } from './Icon'
 import { Slot } from './Slot'
 import { StretchLayout } from './StretchLayout'
 import { Arrow } from './utility/others'
-import { joinClass, joinStyle, prepareProps, SkelProps, SkelSlot, toGetters } from './utility/props'
+import { joinClasses, joinStyle, prepareProps, SkelProps, SkelSlot, toGetters } from './utility/props'
 
 export type FoldableProps = SkelProps<{
   defaultUnfolded?: boolean
@@ -39,7 +39,7 @@ export function Foldable(rawProps: FoldableProps) {
   const attrs = mergeProps(
     restProps,
     toGetters({
-      class: () => joinClass(rawProps.class, 'skel-Foldable_root'),
+      class: () => joinClasses(rawProps, 'skel-Foldable_root'),
       style: () =>
         joinStyle(rawProps.style, {
           '--skel-Foldable_header-background-color': props.headerBackgroundColor,

@@ -1,7 +1,7 @@
 import { mergeProps } from 'solid-js'
 import './StretchLayout.scss'
 import { toArray } from './utility/others'
-import { joinClass, joinStyle, prepareProps, SkelProps, toGetters } from './utility/props'
+import { joinClasses, joinStyle, prepareProps, SkelProps, toGetters } from './utility/props'
 
 export type StretchLayoutProps = SkelProps<{ stretchAt?: number | `${number}`; direction?: 'horizontal' | 'vertical' }>
 
@@ -13,7 +13,7 @@ export function StretchLayout(rawProps: StretchLayoutProps) {
   const attrs = mergeProps(
     restProps,
     toGetters({
-      class: () => joinClass(rawProps.class, 'skel-StretchLayout_root'),
+      class: () => joinClasses(rawProps, 'skel-StretchLayout_root'),
       style: () =>
         joinStyle(rawProps.style, {
           '--skel-StretchLayout_template': 'auto '.repeat(normalizeIndex(Number(props.stretchAt))) + 'minmax(0, 1fr)',

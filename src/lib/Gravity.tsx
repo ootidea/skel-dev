@@ -1,7 +1,7 @@
 import { mergeProps } from 'solid-js'
 import './Gravity.scss'
 import { EnneaPosition, toHorizontalPosition, toVerticalPosition } from './utility/others'
-import { joinClass, prepareProps, SkelProps, toGetters } from './utility/props'
+import { joinClasses, prepareProps, SkelProps, toGetters } from './utility/props'
 
 export type GravityProps = SkelProps<{ to?: EnneaPosition }>
 
@@ -12,7 +12,7 @@ export function Gravity(rawProps: GravityProps) {
   const attrs = mergeProps(
     restProps,
     toGetters({
-      class: () => joinClass(rawProps.class, 'skel-Gravity_root'),
+      class: () => joinClasses(rawProps, 'skel-Gravity_root'),
     })
   )
   return (

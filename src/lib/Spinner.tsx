@@ -1,7 +1,7 @@
 import { createMemo, mergeProps } from 'solid-js'
 import './common.scss'
 import './Spinner.scss'
-import { joinClass, joinStyle, prepareProps, SkelProps, toGetters } from './utility/props'
+import { joinClasses, joinStyle, prepareProps, SkelProps, toGetters } from './utility/props'
 
 export type SpinnerProps = SkelProps<{
   size?: string
@@ -28,7 +28,7 @@ export function Spinner(rawProps: SpinnerProps) {
   const attrs = mergeProps(
     restProps,
     toGetters({
-      class: () => joinClass(rawProps.class, 'skel-Spinner_root'),
+      class: () => joinClasses(rawProps, 'skel-Spinner_root'),
       style: () =>
         joinStyle(rawProps.style, {
           '--skel-Spinner_size': props.size,

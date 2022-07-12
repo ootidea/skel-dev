@@ -3,7 +3,7 @@ import { createSignal, mergeProps } from 'solid-js'
 import { Calendar } from './Calendar'
 import './DatePicker.scss'
 import { Arrow } from './utility/others'
-import { joinClass, prepareProps, SkelProps, toGetters } from './utility/props'
+import { joinClasses, prepareProps, SkelProps, toGetters } from './utility/props'
 
 export type DatePickerProps = SkelProps<{
   month?: Date
@@ -24,7 +24,7 @@ export function DatePicker(rawProps: DatePickerProps) {
   const attrs = mergeProps(
     restProps,
     toGetters({
-      class: () => joinClass(rawProps.class, 'skel-DatePicker_root'),
+      class: () => joinClasses(rawProps, 'skel-DatePicker_root'),
     })
   )
 

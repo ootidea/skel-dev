@@ -5,7 +5,7 @@ import './IconButton.scss'
 import { Spinner } from './Spinner'
 import { calculateActiveColor, calculateHoverColor, toHsl } from './utility/color'
 import { Arrow } from './utility/others'
-import { joinClass, joinClassList, joinStyle, prepareProps, SkelProps, toGetters } from './utility/props'
+import { joinClasses, joinStyle, prepareProps, SkelProps, toGetters } from './utility/props'
 
 export type IconButtonProps = SkelProps<
   {
@@ -35,9 +35,8 @@ export function IconButton(rawProps: IconButtonProps) {
   const attrs = mergeProps(
     restProps,
     toGetters({
-      class: () => joinClass(rawProps.class, 'skel-IconButton_root'),
-      classList: () =>
-        joinClassList(rawProps.classList, {
+      class: () =>
+        joinClasses(rawProps, 'skel-IconButton_root', {
           'skel-IconButton_disabled': rawProps.disabled,
         }),
       style: () =>

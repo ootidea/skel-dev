@@ -1,6 +1,6 @@
 import { mergeProps } from 'solid-js'
 import './Checkbox.scss'
-import { joinClass, joinClassList, prepareProps, SkelProps, toGetters } from './utility/props'
+import { joinClasses, prepareProps, SkelProps, toGetters } from './utility/props'
 
 export type CheckboxProps = SkelProps<
   {
@@ -25,8 +25,7 @@ export function Checkbox(rawProps: CheckboxProps) {
   const attrs = mergeProps(
     restProps,
     toGetters({
-      class: () => joinClass(rawProps.class, 'skel-Checkbox_root'),
-      classList: () => joinClassList(rawProps.classList, { 'skel-Checkbox_disabled': props.disabled }),
+      class: () => joinClasses(rawProps, 'skel-Checkbox_root', { 'skel-Checkbox_disabled': props.disabled }),
     })
   )
 

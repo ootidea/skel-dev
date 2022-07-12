@@ -1,7 +1,7 @@
 import { createSignal, mergeProps, Show } from 'solid-js'
 import './Resizable.scss'
 import { assertNonUndefined } from './utility/others'
-import { joinClass, joinStyle, prepareProps, SkelProps, toGetters } from './utility/props'
+import { joinClasses, joinStyle, prepareProps, SkelProps, toGetters } from './utility/props'
 
 export type ResizableProps = SkelProps<{ onChangeWidth?: (width: number) => unknown }>
 
@@ -13,7 +13,7 @@ export function Resizable(rawProps: ResizableProps) {
   const attrs = mergeProps(
     restProps,
     toGetters({
-      class: () => joinClass(rawProps.class, 'skel-Resizable_root'),
+      class: () => joinClasses(rawProps, 'skel-Resizable_root'),
       style: () => joinStyle(rawProps.style, { width: width() ? `${width()}px` : 'auto' }),
     })
   )

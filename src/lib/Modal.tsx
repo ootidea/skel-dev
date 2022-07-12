@@ -4,7 +4,7 @@ import './common.scss'
 import { IconButton } from './IconButton'
 import './Modal.scss'
 import { Slot } from './Slot'
-import { joinClass, prepareProps, SkelProps, SkelSlot, toGetters } from './utility/props'
+import { joinClasses, prepareProps, SkelProps, SkelSlot, toGetters } from './utility/props'
 
 export type ModalProps = SkelProps<{
   opened?: boolean
@@ -29,7 +29,7 @@ export function Modal(rawProps: ModalProps) {
   const attrs = mergeProps(
     restProps,
     toGetters({
-      class: () => joinClass(rawProps.class, 'skel-Modal_root'),
+      class: () => joinClasses(rawProps, 'skel-Modal_root'),
     })
   )
 

@@ -2,7 +2,7 @@ import { JSX, mergeProps, splitProps } from 'solid-js'
 import { Gravity } from './Gravity'
 import { StretchLayout } from './StretchLayout'
 import './TextInput.scss'
-import { joinClass, joinClassList, SkelProps, toGetters } from './utility/props'
+import { joinClasses, SkelProps, toGetters } from './utility/props'
 
 export type TextInputProps = SkelProps<
   {
@@ -29,8 +29,7 @@ export function TextInput(rawProps: TextInputProps) {
   const attrs = mergeProps(
     props,
     toGetters({
-      class: () => joinClass(rawProps.class, 'skel-TextInput_root'),
-      classList: () => joinClassList(rawProps.classList, { 'skel-TextInput_disabled': rawProps.disabled }),
+      class: () => joinClasses(rawProps, 'skel-TextInput_root', { 'skel-TextInput_disabled': rawProps.disabled }),
     })
   )
 
