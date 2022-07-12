@@ -1,4 +1,4 @@
-import { createSignal } from 'solid-js'
+import { createSignal, Index } from 'solid-js'
 import { Button } from '../lib/Button'
 import { Modal } from '../lib/Modal'
 import { PageTitle } from '../PageTitle'
@@ -38,6 +38,16 @@ export function ModalComponent() {
       <Sample>
         <Modal showCloseButton launcher={({ open }) => <Button onClick={open}>Open</Button>}>
           <div style="padding: 1em">This is sample text for Modal component.</div>
+        </Modal>
+      </Sample>
+
+      <SectionTitle>Title</SectionTitle>
+      <Sample>
+        <Modal title="Title" launcher={({ open }) => <Button onClick={open}>Open</Button>}>
+          <div style="padding: 1em">
+            This is sample text for Modal component.
+            <Index each={new Array(30)}>{(item, index) => <p>{index}</p>}</Index>
+          </div>
         </Modal>
       </Sample>
     </article>

@@ -12,6 +12,7 @@ export type ModalProps = SkelProps<{
   showCloseButton?: boolean
   onChangeOpened?: (opened: boolean) => unknown
   launcher?: SkelSlot<{ open: () => void; close: () => void; toggle: () => void }>
+  title?: SkelSlot<{ open: () => void; close: () => void; toggle: () => void }>
   children?: SkelSlot<{ open: () => void; close: () => void; toggle: () => void }>
 }>
 
@@ -23,7 +24,7 @@ export function Modal(rawProps: ModalProps) {
       opened: false,
       showCloseButton: false,
     },
-    ['launcher', 'onChangeOpened']
+    ['launcher', 'title', 'onChangeOpened']
   )
   const attrs = mergeProps(
     restProps,
@@ -58,12 +59,20 @@ export function Modal(rawProps: ModalProps) {
       <Show when={opened()}>
         <div onClick={onClickBackdrop} {...attrs}>
           <div class="skel-Modal_frame">
-            <Show when={props.showCloseButton}>
+            <Show when={props.showCloseButton || rawProps.title} fallback={<div />}>
               <div class="skel-Modal_header">
-                <IconButton src={closeIcon} onClick={close} />
+                <IconButton class="skel-Modal_invisible" src={closeIcon} />
+                <Slot content={rawProps.title} params={{ open, close, toggle }} />
+                <IconButton
+                  classList={{ 'skel-Modal_invisible': !props.showCloseButton }}
+                  src={closeIcon}
+                  onClick={close}
+                />
               </div>
             </Show>
-            <Slot content={rawProps.children} params={{ open, close, toggle }} />
+            <div class="skel-Modal_body">
+              <Slot content={rawProps.children} params={{ open, close, toggle }} />
+            </div>
           </div>
         </div>
       </Show>

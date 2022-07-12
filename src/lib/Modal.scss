@@ -14,19 +14,30 @@
 }
 
 .skel-Modal_frame {
+  display: grid;
+  grid-auto-flow: row;
+  grid-template-rows: auto minmax(0, 1fr);
+
   background-color: var(--skel-background-color);
   max-height: 90vh;
   max-width: 90vw;
 
   border-radius: 0.5rem;
   box-shadow: 0 3px 14px oklch(0% 0 0 / 20%);
-
-  overflow: auto;
 }
 
 .skel-Modal_header {
   display: flex;
-  justify-content: end;
+  align-items: center;
+  justify-content: space-between;
 
   padding: 0.3em;
+}
+
+.skel-Modal_invisible {
+  visibility: hidden;
+}
+
+.skel-Modal_body {
+  overflow: auto;
 }
